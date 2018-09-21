@@ -1,13 +1,17 @@
 import React from "react";
 
-const ListContainer = ({ teams }) => (
-  <ul style={{ listStyle: "none" }}>
+const ListContainer = ({ teams, callback }) => (
+  <div>
     {teams.map(team => (
-      <ListElement key={team.teamId} {...team} />
+      <ListElement key={team.teamId} {...team} callback={callback} />
     ))}
-  </ul>
+  </div>
 );
 
-const ListElement = ({ teamName }) => <li>{teamName}</li>;
+const ListElement = ({ teamName, callback }) => (
+  <div style={{ margin: 20, display: "flex" }}>
+    <div onClick={() => callback({ name: teamName })}>{teamName}</div>
+  </div>
+);
 
 export default ListContainer;

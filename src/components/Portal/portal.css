@@ -1,0 +1,23 @@
+.Modal-container {
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  text-align: center;
+  position: absolute;
+  background-color: rgba(25, 25, 25, 0.7);
+}
+
+.Modal-content {
+  overflow: scroll;
+  top: 33.3%;
+  position: relative;
+  height: 50%;
+  margin: auto;
+  width: 50%;
+  padding: 20px;
+  background-color: white;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+}
