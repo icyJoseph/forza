@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Place } from "./styled";
+import { Place, PodiumWrapper } from "./styled";
+
+import podiumSorter from "./utils";
 
 const Stand = ({ place, team }) => {
   return (
@@ -10,26 +12,6 @@ const Stand = ({ place, team }) => {
   );
 };
 
-const predictions = [
-  { team: "A", place: 1, position: "first" },
-  { team: "B", place: 2, position: "second" },
-  { team: "C", place: 3, position: "third" }
-];
-
-const wideScreen = ["second", "first", "third"];
-const narrowScreen = ["first", "second", "third"];
-
-function sortPodium(match, position) {
-  switch (match) {
-    case true:
-      return wideScreen.indexOf(position);
-    case false:
-      return narrowScreen.indexOf(position);
-    default:
-      return -1;
-  }
-}
-
 class Podium extends Component {
   state = { matches: true };
 
@@ -37,12 +19,12 @@ class Podium extends Component {
     const { query } = this.props;
     // to be able to test
     const targetWindow = this.props.targetWindow || window;
-
+    // get the matchMedia function
     this.mediaQueryList = targetWindow.matchMedia(query);
-
-    const { matches } = this.mediaQueryList;
+    // listen to updates
     this.mediaQueryList.addListener(this.updateMatches);
-    return this.setState({ matches });
+    // are we matching?
+    return this.updateMatches();
   }
 
   componentWillUnmount() {
@@ -57,22 +39,14 @@ class Podium extends Component {
 
   render() {
     const { matches } = this.state;
-    const sorted = predictions.sort(
-      (a, b) =>
-        sortPodium(matches, a.position) - sortPodium(matches, b.position)
-    );
+    const { predictions } = this.props;
+    const podium = podiumSorter(matches, predictions);
     return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "center"
-        }}
-      >
-        {sorted.map(team => (
+      <PodiumWrapper>
+        {podium.map(team => (
           <Stand key={team.team} {...team} />
         ))}
-      </div>
+      </PodiumWrapper>
     );
   }
 }

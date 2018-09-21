@@ -28,7 +28,11 @@ const mockNarrowScreen = {
 
 describe("It renders a Podium for wide screens", () => {
   const wrapper = shallow(
-    <Podium query={breakpoint} targetWindow={mockWideScreen} />
+    <Podium
+      query={breakpoint}
+      predictions={predictions}
+      targetWindow={mockWideScreen}
+    />
   );
 
   const children = wrapper.children();
@@ -56,7 +60,11 @@ describe("It renders a Podium for wide screens", () => {
 
 describe("It renders a Podium for narrow screens", () => {
   const wrapper = shallow(
-    <Podium query={breakpoint} targetWindow={mockNarrowScreen} />
+    <Podium
+      query={breakpoint}
+      predictions={predictions}
+      targetWindow={mockNarrowScreen}
+    />
   );
 
   const children = wrapper.children();
