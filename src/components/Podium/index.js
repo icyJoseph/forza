@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Place, PodiumWrapper } from "./styled";
 
 import podiumSorter from "./utils";
@@ -50,4 +51,21 @@ class Podium extends Component {
     );
   }
 }
+
+Podium.propTypes = {
+  predictions: PropTypes.array.isRequired,
+  query: PropTypes.string.isRequired,
+  targetWindow: PropTypes.object
+};
+
+Podium.defaultProps = {
+  predictions: [],
+  query: "(min-width: 599px)"
+};
+
+Stand.propTypes = {
+  place: PropTypes.number,
+  team: PropTypes.string
+};
+
 export default Podium;
