@@ -12,3 +12,5 @@ export const buildPlayersTree = teams =>
       ...teamTopPlayers
     };
   }, {});
+
+export const goHome = history => () => history.push("/");

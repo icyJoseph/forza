@@ -6,6 +6,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
+import { goHome } from "../../helpers";
+
 const baseStyle = css`
   flex-grow: 1;
 `;
@@ -16,13 +18,12 @@ const MainTitle = styled(Typography)`
 
 const Bar = styled(AppBar)`
   ${baseStyle};
-  border: 1px solid;
 `;
 
-export const TopMenu = () => (
+export const TopMenu = ({ history }) => (
   <Bar position="static" color="primary">
     <Toolbar>
-      <MainTitle variant="title" color="inherit">
+      <MainTitle variant="title" color="inherit" onClick={goHome(history)}>
         Predictions
       </MainTitle>
       <Button color="inherit">Share</Button>

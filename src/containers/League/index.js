@@ -19,7 +19,7 @@ const predictions = [
   { team: "C", place: 3 }
 ];
 
-export class App extends Component {
+export class League extends Component {
   state = {
     leagueName: "",
     country: "",
@@ -29,10 +29,25 @@ export class App extends Component {
 
   componentDidMount() {
     // Mock eventual network interactions
-    this.props.fetch();
-    return new Promise((resolve, reject) => setTimeout(() => resolve(), 1000))
-      .then(() => this.props.data(Mock))
-      .then(() => this.setState({ ...this.props.leagues.data[0] }));
+    // if the user somehow ends up here without data
+    const league = this.props.leagues.data.find(
+      league => league.leagueId === Number(this.props.match.params.league)
+    );
+    if (!league) {
+      this.props.fetch();
+      return new Promise(resolve => setTimeout(resolve, 1000))
+        .then(() => this.props.data(Mock))
+        .then(() => {
+          const { params } = this.props.match;
+
+          return this.setState({
+            ...this.props.leagues.data.find(
+              league => league.leagueId === Number(params.league)
+            )
+          });
+        });
+    }
+    return this.setState({ ...league });
   }
 
   render() {
@@ -44,17 +59,17 @@ export class App extends Component {
         <div>
           {leagueName} - {country}
         </div>
-        <div style={{ marginTop: 40, border: "1px solid" }}>
+        <div style={{ marginTop: 40 }}>
           <Podium query={breakpoint} predictions={predictions} />
         </div>
-        <div style={{ marginTop: 40, border: "1px solid" }}>
+        <div style={{ marginTop: 40 }}>
           <TopScorer>
             {Object.keys(players).map(player => (
               <div key={player}>{player}</div>
             ))}
           </TopScorer>
         </div>
-        <div style={{ marginTop: 40, border: "1px solid" }}>
+        <div style={{ marginTop: 40 }}>
           <List teams={teams} callback={e => console.log(e)} />
         </div>
       </Fragment>
@@ -69,4 +84,4 @@ export default connect(
     fetch: () => dispatch(fetchLeaguesData),
     data: ({ leagues }) => dispatch(leaguesData(leagues))
   })
-)(App);
+)(League);

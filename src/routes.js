@@ -1,14 +1,23 @@
 import React, { Fragment } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import TopMenu from "./containers/TopMenu";
-import App from "./containers/App";
+import League from "./containers/League";
+import Landing from "./containers/Landing";
+import BackButton from "./containers/BackButton";
 
 const Router = () => (
   <BrowserRouter>
     <Fragment>
       <Route path="/" component={TopMenu} />
-      <Route path="/" component={App} />
+      <Switch>
+        <Route exact path="/:league" component={League} />
+        <Route path="/" component={Landing} />
+      </Switch>
+      <Route
+        path="/:league"
+        render={({ ...props }) => <BackButton {...props} />}
+      />
     </Fragment>
   </BrowserRouter>
 );
