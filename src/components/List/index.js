@@ -1,7 +1,14 @@
 import React from "react";
 
 const ListContainer = ({ teams, callback }) => (
-  <div>
+  <div
+    style={{
+      position: "absolute",
+      width: "100%",
+      height: "30%",
+      overflow: "scroll"
+    }}
+  >
     {teams.map(team => (
       <ListElement key={team.teamId} {...team} callback={callback} />
     ))}

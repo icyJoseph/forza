@@ -25,13 +25,6 @@ const predictions = [
   { team: "C", place: 3, position: "third" }
 ];
 
-const Stick = styled.div`
-  position: sticky;
-  top: 0;
-  height: 100%;
-  background-color: white;
-`;
-
 const baseStyle = css`
   flex-grow: 1;
 `;
@@ -47,20 +40,18 @@ const Bar = styled(AppBar)`
 
 const App = () => (
   <Fragment>
-    <Stick>
-      <Bar position="static" color="primary">
-        <Toolbar>
-          <MainTitle variant="title" color="inherit">
-            {leagueName} Predictions - {country}
-          </MainTitle>
-          <Button color="inherit">Share</Button>
-          <Button color="inherit">Reset</Button>
-        </Toolbar>
-      </Bar>
-      <div style={{ marginTop: 40, border: "1px solid" }}>
-        <Podium query={breakpoint} predictions={predictions} />
-      </div>
-    </Stick>
+    <Bar position="static" color="primary">
+      <Toolbar>
+        <MainTitle variant="title" color="inherit">
+          {leagueName} Predictions - {country}
+        </MainTitle>
+        <Button color="inherit">Share</Button>
+        <Button color="inherit">Reset</Button>
+      </Toolbar>
+    </Bar>
+    <div style={{ marginTop: 40, border: "1px solid" }}>
+      <Podium query={breakpoint} predictions={predictions} />
+    </div>
     <div style={{ marginTop: 40, border: "1px solid" }}>
       <TopScorer>
         {Object.keys(players).map(player => (
@@ -69,7 +60,7 @@ const App = () => (
       </TopScorer>
     </div>
     <div style={{ marginTop: 40, border: "1px solid" }}>
-      <List teams={teams} />
+      <List teams={teams} callback={e => console.log(e)} />
     </div>
   </Fragment>
 );
