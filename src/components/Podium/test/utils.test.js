@@ -1,9 +1,9 @@
 import podiumSorter from "../utils";
 
 const predictions = [
-  { team: "A", place: 1, position: "first" },
-  { team: "B", place: 2, position: "second" },
-  { team: "C", place: 3, position: "third" }
+  { team: "A", place: 1 },
+  { team: "B", place: 2 },
+  { team: "C", place: 3 }
 ];
 
 describe("it sorts as expected", () => {
@@ -12,9 +12,9 @@ describe("it sorts as expected", () => {
   });
   it("sorts when matches is true, wide screen", () => {
     const expected = [
-      { team: "B", place: 2, position: "second" },
-      { team: "A", place: 1, position: "first" },
-      { team: "C", place: 3, position: "third" }
+      { team: "B", place: 2 },
+      { team: "A", place: 1 },
+      { team: "C", place: 3 }
     ];
     expect(podiumSorter(true, predictions)).toEqual(expected);
   });

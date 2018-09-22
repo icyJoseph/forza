@@ -20,9 +20,9 @@ import { buildPlayersTree } from "../../helpers";
 const breakpoint = "(min-width: 599px)";
 
 const predictions = [
-  { team: "A", place: 1, position: "first" },
-  { team: "B", place: 2, position: "second" },
-  { team: "C", place: 3, position: "third" }
+  { team: "A", place: 1 },
+  { team: "B", place: 2 },
+  { team: "C", place: 3 }
 ];
 
 const baseStyle = css`

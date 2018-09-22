@@ -1,12 +1,12 @@
-const wideScreen = ["second", "first", "third"];
-const narrowScreen = ["first", "second", "third"];
+const wideScreen = [2, 1, 3];
+const narrowScreen = [1, 2, 3];
 
-export function sortPodium(match, position) {
+export function sortPodium(match, place) {
   switch (match) {
     case true:
-      return wideScreen.indexOf(position);
+      return wideScreen.indexOf(place);
     case false:
-      return narrowScreen.indexOf(position);
+      return narrowScreen.indexOf(place);
     default:
       return -1;
   }
@@ -14,7 +14,7 @@ export function sortPodium(match, position) {
 
 const podiumSorter = (matches, predictions) =>
   predictions.sort(
-    (a, b) => sortPodium(matches, a.position) - sortPodium(matches, b.position)
+    (a, b) => sortPodium(matches, a.place) - sortPodium(matches, b.place)
   );
 
 export default podiumSorter;
