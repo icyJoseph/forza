@@ -21,13 +21,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:report": "yarn test --coverage",
     "eject": "react-scripts eject"
   },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/registerServiceWorker.js",
-      "!src/setupTests.js"
+      "!src/ducks/index.js",
+      "!src/setupTests.js",
+      "!src/index.js"
     ],
     "coverageReporters": [
       "text",
