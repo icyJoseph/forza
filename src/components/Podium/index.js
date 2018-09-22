@@ -4,9 +4,9 @@ import { Place, PodiumWrapper } from "./styled";
 
 import podiumSorter from "./utils";
 
-const Stand = ({ place, team }) => {
+const Stand = ({ place, team, matches }) => {
   return (
-    <Place place={place}>
+    <Place place={place} matches={matches}>
       <span>{team}</span>
       <span>{place}</span>
     </Place>
@@ -43,9 +43,9 @@ class Podium extends Component {
     const { predictions } = this.props;
     const podium = podiumSorter(matches, predictions);
     return (
-      <PodiumWrapper>
+      <PodiumWrapper matches={matches}>
         {podium.map(team => (
-          <Stand key={team.team} {...team} />
+          <Stand key={team.team} {...team} matches={matches} />
         ))}
       </PodiumWrapper>
     );
