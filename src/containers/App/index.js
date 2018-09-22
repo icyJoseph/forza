@@ -1,14 +1,8 @@
 import React, { Component, Fragment } from "react";
-import styled, { css } from "styled-components";
 
 import { connect } from "react-redux";
 
 import { fetchLeaguesData, leaguesData } from "../../ducks/leagues";
-
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 
 import List from "../../components/List";
 import Podium from "../../components/Podium";
@@ -24,19 +18,6 @@ const predictions = [
   { team: "B", place: 2 },
   { team: "C", place: 3 }
 ];
-
-const baseStyle = css`
-  flex-grow: 1;
-`;
-
-const MainTitle = styled(Typography)`
-  ${baseStyle};
-`;
-
-const Bar = styled(AppBar)`
-  ${baseStyle};
-  border: 1px solid;
-`;
 
 export class App extends Component {
   state = {
@@ -60,15 +41,9 @@ export class App extends Component {
 
     return (
       <Fragment>
-        <Bar position="static" color="primary">
-          <Toolbar>
-            <MainTitle variant="title" color="inherit">
-              {leagueName} Predictions - {country}
-            </MainTitle>
-            <Button color="inherit">Share</Button>
-            <Button color="inherit">Reset</Button>
-          </Toolbar>
-        </Bar>
+        <div>
+          {leagueName} - {country}
+        </div>
         <div style={{ marginTop: 40, border: "1px solid" }}>
           <Podium query={breakpoint} predictions={predictions} />
         </div>

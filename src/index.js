@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./containers/App";
+import Routes from "./routes";
 import registerServiceWorker from "./registerServiceWorker";
 
 import { createStore } from "redux";
@@ -15,7 +15,7 @@ const store = createStore(rootReducer, undefined, reduxDevTools);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Routes />
   </Provider>,
   document.getElementById("root")
 );
