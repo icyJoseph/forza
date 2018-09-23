@@ -7,7 +7,7 @@ import NavigateBefore from "@material-ui/icons/NavigateBefore";
 import { goHome } from "../../helpers";
 
 const Pinned = styled.div`
-  position: absolute;
+  position: fixed;
   text-align: center;
   bottom: 30px;
   right: 30px;
@@ -16,7 +16,7 @@ const Pinned = styled.div`
 const BackButton = ({ history }) => (
   <Pinned onClick={goHome(history)}>
     <Button variant="fab" color="primary">
-      <NavigateBefore />
+      <NavigateBefore fontSize="large" />
     </Button>
   </Pinned>
 );

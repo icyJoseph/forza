@@ -4,12 +4,13 @@ import { connect } from "react-redux";
 
 import { fetchLeaguesData, leaguesData } from "../../ducks/leagues";
 
+import { StickyPredictions } from "./styled";
+
 import List from "../../components/List";
 import Podium from "../../components/Podium";
-import TopScorer from "../TopScorer";
 
 import Mock from "../../mock/api";
-import { buildPlayersTree } from "../../helpers";
+// import { buildPlayersTree } from "../../helpers";
 
 const breakpoint = "(min-width: 599px)";
 
@@ -52,23 +53,25 @@ export class League extends Component {
 
   render() {
     const { leagueName, country, teams } = this.state;
-    const players = buildPlayersTree(teams);
+    // const players = buildPlayersTree(teams);
 
     return (
       <Fragment>
-        <div>
-          {leagueName} - {country}
-        </div>
-        <div style={{ marginTop: 40 }}>
-          <Podium query={breakpoint} predictions={predictions} />
-        </div>
-        <div style={{ marginTop: 40 }}>
+        <StickyPredictions>
+          <div style={{ paddingTop: 15 }}>
+            {leagueName} - {country}
+          </div>
+          <div>
+            <Podium query={breakpoint} predictions={predictions} />
+          </div>
+        </StickyPredictions>
+        {/* <div style={{ marginTop: 40 }}>
           <TopScorer>
             {Object.keys(players).map(player => (
               <div key={player}>{player}</div>
             ))}
           </TopScorer>
-        </div>
+        </div> */}
         <div style={{ marginTop: 40 }}>
           <List teams={teams} callback={e => console.log(e)} />
         </div>

@@ -21,7 +21,7 @@ const Bar = styled(AppBar)`
 `;
 
 export const TopMenu = ({ history }) => (
-  <Bar position="static" color="primary">
+  <Bar position="sticky" color="primary">
     <Toolbar>
       <MainTitle variant="title" color="inherit" onClick={goHome(history)}>
         Predictions
