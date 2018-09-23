@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-
+import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import NavigateBefore from "@material-ui/icons/NavigateBefore";
-
 import { curry, goHome } from "../../helpers";
+
+const buttonColor = {
+  button: { color: "white", background: "dodgerblue" }
+};
 
 const Pinned = styled.div`
   position: fixed;
@@ -13,12 +16,12 @@ const Pinned = styled.div`
   right: 30px;
 `;
 
-const BackButton = ({ history }) => (
+const BackButton = ({ classes, history }) => (
   <Pinned onClick={curry(goHome)(history)}>
-    <Button variant="fab" color="primary">
+    <Button variant="fab" className={classes.button}>
       <NavigateBefore fontSize="large" />
     </Button>
   </Pinned>
 );
 
-export default BackButton;
+export default withStyles(buttonColor)(BackButton);
