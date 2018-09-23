@@ -8,7 +8,7 @@ import { curry } from "../../helpers";
 import logo from "../../logo.png";
 
 const HeaderSegment = styled.div`
-  margin: 20px auto 0;
+  margin: 20px auto;
   text-align: center;
 `;
 
@@ -40,7 +40,8 @@ export class Landing extends Component {
     const { allLeagues } = this.props;
     return (
       <Fragment>
-        {CustomHeader("Hello!", "display3")}
+        {CustomHeader("Forza", "display3")}
+        {CustomHeader("Challenge", "display2")}
         {ImageHeader(logo)}
         {CustomHeader(" Which league would you like to predict?", "subheading")}
         <CardContainer>
