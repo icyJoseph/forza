@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import NavigateBefore from "@material-ui/icons/NavigateBefore";
 
-import { goHome } from "../../helpers";
+import { curry, goHome } from "../../helpers";
 
 const Pinned = styled.div`
   position: fixed;
@@ -14,7 +14,7 @@ const Pinned = styled.div`
 `;
 
 const BackButton = ({ history }) => (
-  <Pinned onClick={goHome(history)}>
+  <Pinned onClick={curry(goHome)(history)}>
     <Button variant="fab" color="primary">
       <NavigateBefore fontSize="large" />
     </Button>
