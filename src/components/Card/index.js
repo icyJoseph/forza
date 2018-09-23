@@ -29,7 +29,7 @@ export const CardContainer = styled.div`
   flex-wrap: wrap;
   padding: 0 25px;
   justify-content: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 100px;
   @media (min-width: 1000px) {
     width: 80%;
   }
