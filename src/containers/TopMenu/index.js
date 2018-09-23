@@ -1,12 +1,12 @@
 import React from "react";
 import styled, { css } from "styled-components";
-
+import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import { goHome } from "../../helpers";
+import { curry, goHome } from "../../helpers";
 
 const baseStyle = css`
   flex-grow: 1;
@@ -20,10 +20,18 @@ const Bar = styled(AppBar)`
   ${baseStyle};
 `;
 
-export const TopMenu = ({ history }) => (
-  <Bar position="sticky" color="primary">
+const barStyle = {
+  bar: { backgroundColor: "dodgerBlue" }
+};
+
+export const TopMenu = ({ history, classes }) => (
+  <Bar position="sticky" className={classes.bar}>
     <Toolbar>
-      <MainTitle variant="title" color="inherit" onClick={goHome(history)}>
+      <MainTitle
+        variant="title"
+        color="inherit"
+        onClick={curry(goHome)(history)}
+      >
         Predictions
       </MainTitle>
       <Button color="inherit">Share</Button>
@@ -32,4 +40,4 @@ export const TopMenu = ({ history }) => (
   </Bar>
 );
 
-export default TopMenu;
+export default withStyles(barStyle)(TopMenu);
