@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Place, PodiumWrapper } from "./styled";
+import { Place, PodiumWrapper, Name, Position } from "./styled";
 
 import podiumSorter from "./utils";
 
 const Stand = ({ place, team, matches }) => {
   return (
     <Place place={place} matches={matches}>
-      <span>{team}</span>
-      <span>{place}</span>
+      <Name>{team}</Name>
+      <Position>{place}</Position>
     </Place>
   );
 };
