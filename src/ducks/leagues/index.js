@@ -30,6 +30,7 @@ export const mapAllLeaguesToProps = ({ leagues: { allLeagues } }) => ({
 // async handler
 export const fetchLeagues = dispatch => {
   dispatch(onFetchLeagueData);
+  // TODO: add cache logic here
   return axios
     .get(url)
     .then(({ data: { leagues } }) => leagues)
