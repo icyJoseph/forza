@@ -5,9 +5,10 @@ import styled from "styled-components";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
+import Podium from "../../containers/Podium";
+
 import Card, { CardContainer } from "../../components/Card";
 import List from "../../components/List";
-import Podium from "../../components/Podium";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
 import { buildPlayersTree } from "../../helpers";
