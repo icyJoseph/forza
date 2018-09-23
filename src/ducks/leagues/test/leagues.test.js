@@ -1,24 +1,26 @@
-import leagues, { fetchLeaguesData, leaguesData } from "../";
+import leagues, { onFetchLeagueData, onSuccessLeagueData } from "../";
 
 describe("it handles actions", () => {
   it("has initial state, and returns it by default", () => {
     expect(leagues(undefined, { type: "invalid" })).toEqual({
-      data: [],
+      allLeagues: [],
       loading: false
     });
   });
 
   it("handles fetching", () => {
-    expect(leagues(undefined, fetchLeaguesData)).toEqual({
-      data: [],
+    expect(leagues(undefined, onFetchLeagueData)).toEqual({
+      allLeagues: [],
       loading: true
     });
   });
 
   it("handles success", () => {
     const seed = [{ leagues: {} }];
-    expect(leagues({ data: [], loading: true }, leaguesData(seed))).toEqual({
-      data: seed,
+    expect(
+      leagues({ allLeagues: [], loading: true }, onSuccessLeagueData(seed))
+    ).toEqual({
+      allLeagues: seed,
       loading: false
     });
   });

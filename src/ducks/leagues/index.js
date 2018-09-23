@@ -3,18 +3,18 @@ const FETCH_LEAGUES_DATA = "leagues fetch";
 const SUCCESS_LEAGUES_DATA = "leagues success";
 
 // actions
-export const fetchLeaguesData = {
+export const onFetchLeagueData = {
   type: FETCH_LEAGUES_DATA
 };
 
-export const leaguesData = leagues => ({
+export const onSuccessLeagueData = allLeagues => ({
   type: SUCCESS_LEAGUES_DATA,
-  leagues
+  allLeagues
 });
 
 // initial state
 const initialState = {
-  data: [],
+  allLeagues: [],
   loading: false
 };
 
@@ -24,8 +24,8 @@ function leagues(state = initialState, action) {
     case FETCH_LEAGUES_DATA:
       return { ...state, loading: true };
     case SUCCESS_LEAGUES_DATA:
-      const { leagues } = action;
-      return { ...state, data: leagues, loading: false };
+      const { allLeagues } = action;
+      return { ...state, allLeagues, loading: false };
     default:
       return state;
   }
