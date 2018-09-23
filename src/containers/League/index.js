@@ -1,15 +1,16 @@
 import React, { Component, Fragment } from "react";
-
 import { connect } from "react-redux";
+import styled from "styled-components";
 
-import { StickyPredictions } from "./styled";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
-import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
-
+import Card, { CardContainer } from "../../components/Card";
 import List from "../../components/List";
 import Podium from "../../components/Podium";
+import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
-// import { buildPlayersTree } from "../../helpers";
+import { buildPlayersTree } from "../../helpers";
 
 const breakpoint = "(min-width: 599px)";
 
@@ -19,7 +20,23 @@ const predictions = [
   { team: "C", place: 3 }
 ];
 
+export const PredictionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
+export const StyledTabs = styled(Tabs)`
+  margin-bottom: 20px;
+`;
+
 export class League extends Component {
+  state = {
+    value: 0
+  };
+
+  handleChange = (e, value) => this.setState({ value });
+
   render() {
     const league = this.props.allLeagues.find(
       league => league.leagueId === Number(this.props.match.params.league)
@@ -31,28 +48,32 @@ export class League extends Component {
     }
 
     const { leagueName = "", country = "", teams = [] } = league;
-    // const players = buildPlayersTree(teams);
-
+    const playersTree = buildPlayersTree(teams);
+    const players = Object.keys(playersTree).reduce(
+      (acc, player) => acc.concat(playersTree[player]),
+      []
+    );
+    const { value } = this.state;
     return (
       <Fragment>
-        <StickyPredictions>
-          <div style={{ paddingTop: 15 }}>
-            {leagueName} - {country}
-          </div>
-          <div>
-            <Podium query={breakpoint} predictions={predictions} />
-          </div>
-        </StickyPredictions>
-        {/* <div style={{ marginTop: 40 }}>
-          <TopScorer>
-            {Object.keys(players).map(player => (
-              <div key={player}>{player}</div>
-            ))}
-          </TopScorer>
-        </div> */}
-        <div style={{ marginTop: 40 }}>
-          <List teams={teams} callback={e => console.log(e)} />
-        </div>
+        <PredictionContainer>
+          <Card height={20}>{[`${country} - ${leagueName}`]}</Card>
+          <Podium query={breakpoint} predictions={predictions} />
+        </PredictionContainer>
+        <StyledTabs value={value} onChange={this.handleChange} centered>
+          <Tab label="Teams" />
+          <Tab label="Top Players" />
+        </StyledTabs>
+        {value === 0 && (
+          <CardContainer>
+            <List items={teams} type="teams" />
+          </CardContainer>
+        )}
+        {value === 1 && (
+          <CardContainer>
+            <List items={players} type="players" />
+          </CardContainer>
+        )}
       </Fragment>
     );
   }
