@@ -1,20 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchLeaguesData, leaguesData } from "../../ducks/leagues";
 
-import Mock from "../../mock/api";
+import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
 export class Landing extends Component {
-  state = {
-    leagues: []
-  };
-
   componentDidMount() {
-    // Mock eventual network interactions
     this.props.fetch();
-    return new Promise(resolve => setTimeout(resolve, 1000))
-      .then(() => this.props.data(Mock))
-      .then(() => this.setState({ leagues: this.props.leagues.data }));
   }
 
   goToLeague = e => {
@@ -23,14 +14,14 @@ export class Landing extends Component {
   };
 
   render() {
-    const { leagues } = this.state;
+    const { allLeagues } = this.props;
     return (
       <div>
         <div style={{ margin: 50 }}>
           <div>Hi! Welcome to Predictions App</div>
           <div>Which league would you like to predict?</div>
         </div>
-        {leagues.map(league => (
+        {allLeagues.map(league => (
           <div
             style={{ margin: 50 }}
             id={league.leagueId}
@@ -45,11 +36,8 @@ export class Landing extends Component {
   }
 }
 
-// TODO: refactor
+// Redux
 export default connect(
-  ({ leagues }) => ({ leagues }),
-  dispatch => ({
-    fetch: () => dispatch(fetchLeaguesData),
-    data: ({ leagues }) => dispatch(leaguesData(leagues))
-  })
+  mapAllLeaguesToProps,
+  mapFetchAction
 )(Landing);

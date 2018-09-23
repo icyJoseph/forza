@@ -2,14 +2,13 @@ import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
 
-import { fetchLeaguesData, leaguesData } from "../../ducks/leagues";
-
 import { StickyPredictions } from "./styled";
+
+import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
 import List from "../../components/List";
 import Podium from "../../components/Podium";
 
-import Mock from "../../mock/api";
 // import { buildPlayersTree } from "../../helpers";
 
 const breakpoint = "(min-width: 599px)";
@@ -21,38 +20,17 @@ const predictions = [
 ];
 
 export class League extends Component {
-  state = {
-    leagueName: "",
-    country: "",
-    teams: [],
-    err: null
-  };
-
-  componentDidMount() {
-    // Mock eventual network interactions
-    // if the user somehow ends up here without data
-    const league = this.props.leagues.data.find(
+  render() {
+    const league = this.props.allLeagues.find(
       league => league.leagueId === Number(this.props.match.params.league)
     );
+
     if (!league) {
       this.props.fetch();
-      return new Promise(resolve => setTimeout(resolve, 1000))
-        .then(() => this.props.data(Mock))
-        .then(() => {
-          const { params } = this.props.match;
-
-          return this.setState({
-            ...this.props.leagues.data.find(
-              league => league.leagueId === Number(params.league)
-            )
-          });
-        });
+      return <div>Just one sec...</div>;
     }
-    return this.setState({ ...league });
-  }
 
-  render() {
-    const { leagueName, country, teams } = this.state;
+    const { leagueName = "", country = "", teams = [] } = league;
     // const players = buildPlayersTree(teams);
 
     return (
@@ -80,11 +58,8 @@ export class League extends Component {
   }
 }
 
-// TODO: refactor
+// Redux
 export default connect(
-  ({ leagues }) => ({ leagues }),
-  dispatch => ({
-    fetch: () => dispatch(fetchLeaguesData),
-    data: ({ leagues }) => dispatch(leaguesData(leagues))
-  })
+  mapAllLeaguesToProps,
+  mapFetchAction
 )(League);
