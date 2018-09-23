@@ -13,4 +13,6 @@ export const buildPlayersTree = teams =>
     };
   }, {});
 
-export const goHome = history => () => history.push("/");
+export const curry = f => (...a) => (...b) => f(...a, ...b);
+
+export const goHome = history => history.push("/");

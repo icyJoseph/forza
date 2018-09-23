@@ -1,4 +1,4 @@
-import { buildPlayersTree } from "../";
+import { buildPlayersTree, curry } from "../";
 
 const teams = [
   {
@@ -62,5 +62,12 @@ const expected = {
 describe("given teams data from a league", () => {
   it("collects top players from every team into an object", () => {
     expect(buildPlayersTree(teams)).toMatchObject(expected);
+  });
+});
+
+describe("curry", () => {
+  const sum = (...args) => args.reduce((acc, val) => acc + val, 0);
+  it("does partial application", () => {
+    expect(curry(sum)(1, 2, 3)(4, 5, 6)).toEqual(21);
   });
 });
