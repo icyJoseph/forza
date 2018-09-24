@@ -11,7 +11,7 @@ describe("it handles user predictions", () => {
       predictions: {
         La: { 1: { teamName: "A", place: 1, leagueName: "La", teamId: 1 } }
       },
-      topScorer: ""
+      topScorer: {}
     });
   });
   it("updates a teams place prediction", () => {
@@ -21,7 +21,7 @@ describe("it handles user predictions", () => {
           predictions: {
             La: { 1: { teamName: "A", place: 1, leagueName: "La", teamId: 1 } }
           },
-          topScorer: ""
+          topScorer: {}
         },
         setPrediction({ leagueName: "La", teamName: "A", teamId: 1 }, 3)
       )
@@ -29,7 +29,7 @@ describe("it handles user predictions", () => {
       predictions: {
         La: { 3: { teamName: "A", place: 3, leagueName: "La", teamId: 1 } }
       },
-      topScorer: ""
+      topScorer: {}
     });
   });
 
