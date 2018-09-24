@@ -1,5 +1,6 @@
 import { buildPlayersTree, curry } from "../";
 
+const leagueName = "test";
 const teams = [
   {
     teamId: 1,
@@ -39,7 +40,8 @@ const expected = {
     goalsLastSeason: 21,
     teamId: 1,
     teamName: "Manchester City",
-    teamColor: "#65b2e9"
+    teamColor: "#65b2e9",
+    leagueName
   },
   "Romelu Lukaku": {
     playerId: 4,
@@ -47,7 +49,8 @@ const expected = {
     goalsLastSeason: 16,
     teamId: 2,
     teamName: "Manchester United",
-    teamColor: "#DA291C"
+    teamColor: "#DA291C",
+    leagueName
   },
   "Jesse Lingard": {
     playerId: 5,
@@ -55,13 +58,14 @@ const expected = {
     goalsLastSeason: 7,
     teamId: 2,
     teamName: "Manchester United",
-    teamColor: "#DA291C"
+    teamColor: "#DA291C",
+    leagueName
   }
 };
 
 describe("given teams data from a league", () => {
   it("collects top players from every team into an object", () => {
-    expect(buildPlayersTree(teams)).toMatchObject(expected);
+    expect(buildPlayersTree(teams, leagueName)).toMatchObject(expected);
   });
 });
 

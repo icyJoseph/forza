@@ -1,11 +1,14 @@
-const pickTopPlayers = ({ topPlayers, ...team }) =>
+const pickTopPlayers = ({ topPlayers, ...team }, leagueName) =>
   topPlayers.reduce((prev, { playerName, ...player }) => {
-    return { ...prev, [playerName]: { playerName, ...player, ...team } };
+    return {
+      ...prev,
+      [playerName]: { playerName, ...player, ...team, leagueName }
+    };
   }, {});
 
-export const buildPlayersTree = teams =>
+export const buildPlayersTree = (teams, leagueName) =>
   teams.reduce((otherTopPlayers, team) => {
-    const teamTopPlayers = pickTopPlayers(team);
+    const teamTopPlayers = pickTopPlayers(team, leagueName);
 
     return {
       ...otherTopPlayers,
