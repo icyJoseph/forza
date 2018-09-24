@@ -18,9 +18,8 @@ export const Position = styled.div`
 
 export const Place = styled.div.attrs({
   style: ({ place, matches }) => {
-    const span = 4 - place;
     return {
-      height: `${70 * span}px`,
+      height: `${70 / place}%`,
       width: matches ? "180px" : "90px"
     };
   }
@@ -40,6 +39,7 @@ export const PodiumWrapper = styled.div.attrs({
     margin: matches ? "auto" : "0 20px"
   })
 })`
+  height: 200px;
   align-items: flex-end;
   display: flex;
   justify-content: center;

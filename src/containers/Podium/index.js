@@ -19,7 +19,7 @@ const PlaceHolder = () => (
     style={{
       display: "flex",
       flexDirection: "column",
-      height: "242px",
+      height: "200px",
       justifyContent: "center"
     }}
   >
@@ -61,11 +61,12 @@ class Podium extends Component {
 
     return (
       <Fragment>
-        {topScorerForLeague && (
-          <div style={{ margin: "0 auto" }}>
-            {topScorerForLeague.playerName}
-          </div>
-        )}
+        <div style={{ margin: "0 auto", height: "32px" }}>
+          {topScorerForLeague
+            ? topScorerForLeague.playerName
+            : "Who'll be top scorer?"}
+        </div>
+
         <PodiumWrapper matches={matches}>
           {predictionsForLeague ? (
             podiumSorter(matches, predictionsForLeague).map(team => (
