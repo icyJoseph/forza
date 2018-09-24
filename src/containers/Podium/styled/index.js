@@ -20,8 +20,8 @@ export const Place = styled.div.attrs({
   style: ({ place, matches }) => {
     const span = 4 - place;
     return {
-      height: `${50 * span}px`,
-      width: matches ? "180px" : "80px"
+      height: `${70 * span}px`,
+      width: matches ? "180px" : "90px"
     };
   }
 })`
@@ -30,6 +30,8 @@ export const Place = styled.div.attrs({
   align-content: stretch;
   border-radius: 15px 0px;
   border: 1px solid;
+  text-align: center;
+  padding: 5px;
   margin: 10px;
 `;
 

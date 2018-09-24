@@ -12,9 +12,15 @@ export function sortPodium(match, place) {
   }
 }
 
-const podiumSorter = (matches, predictions) =>
-  predictions.sort(
-    (a, b) => sortPodium(matches, a.place) - sortPodium(matches, b.place)
-  );
+const podiumSorter = (matches, predictions) => {
+  return Object.keys(predictions)
+    .map(pr => ({
+      place: 1,
+      ...predictions[pr]
+    }))
+    .sort(
+      (a, b) => sortPodium(matches, a.place) - sortPodium(matches, b.place)
+    );
+};
 
 export default podiumSorter;

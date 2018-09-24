@@ -1,17 +1,32 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Place, PodiumWrapper, Name, Position } from "./styled";
 
 import podiumSorter from "./utils";
 
-const Stand = ({ place, team, matches }) => {
+const Stand = ({ place, teamName, matches }) => {
   return (
     <Place place={place} matches={matches}>
-      <Name>{team}</Name>
+      <Name>{teamName}</Name>
       <Position>{place}</Position>
     </Place>
   );
 };
+
+const PlaceHolder = () => (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      height: "242px",
+      justifyContent: "center"
+    }}
+  >
+    <div style={{ margin: "0 auto" }}>How will the league end?</div>
+    <div style={{ margin: "0 auto" }}>Select from the list below :)</div>
+  </div>
+);
 
 class Podium extends Component {
   state = { matches: true };
@@ -40,26 +55,39 @@ class Podium extends Component {
 
   render() {
     const { matches } = this.state;
-    const { predictions } = this.props;
-    const podium = podiumSorter(matches, predictions);
+    const { predictions, leagueName, topScorer } = this.props;
+    const predictionsForLeague = predictions[leagueName];
+    const topScorerForLeague = topScorer[leagueName];
+
     return (
-      <PodiumWrapper matches={matches}>
-        {podium.map(team => (
-          <Stand key={team.team} {...team} matches={matches} />
-        ))}
-      </PodiumWrapper>
+      <Fragment>
+        {topScorerForLeague && (
+          <div style={{ margin: "0 auto" }}>
+            {topScorerForLeague.playerName}
+          </div>
+        )}
+        <PodiumWrapper matches={matches}>
+          {predictionsForLeague ? (
+            podiumSorter(matches, predictionsForLeague).map(team => (
+              <Stand key={team.teamName} {...team} matches={matches} />
+            ))
+          ) : (
+            <PlaceHolder />
+          )}
+        </PodiumWrapper>
+      </Fragment>
     );
   }
 }
 
 Podium.propTypes = {
-  predictions: PropTypes.array.isRequired,
+  predictions: PropTypes.object.isRequired,
   query: PropTypes.string.isRequired,
   targetWindow: PropTypes.object
 };
 
 Podium.defaultProps = {
-  predictions: [],
+  predictions: {},
   query: "(min-width: 599px)"
 };
 
@@ -68,4 +96,7 @@ Stand.propTypes = {
   team: PropTypes.string
 };
 
-export default Podium;
+export default connect(({ predictions: { predictions, topScorer } }) => ({
+  predictions,
+  topScorer
+}))(Podium);
