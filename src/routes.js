@@ -14,10 +14,7 @@ const Router = () => (
         <Route exact path="/:league" component={League} />
         <Route path="/" component={Landing} />
       </Switch>
-      <Route
-        path="/:league"
-        render={({ ...props }) => <BackButton {...props} />}
-      />
+      <Route path="/:league" component={BackButton} />
     </Fragment>
   </BrowserRouter>
 );
