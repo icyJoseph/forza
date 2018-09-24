@@ -12,6 +12,22 @@ describe("it handles user predictions", () => {
       topScorer: ""
     });
   });
+  it("updates a teams place prediction", () => {
+    expect(
+      predictions(
+        {
+          predictions: {
+            La: { 1: { teamName: "A", place: 1, leagueName: "La" } }
+          },
+          topScorer: ""
+        },
+        setPrediction({ leagueName: "La", teamName: "A" }, 3)
+      )
+    ).toEqual({
+      predictions: { La: { 3: { teamName: "A", place: 3, leagueName: "La" } } },
+      topScorer: ""
+    });
+  });
 
   it("takes top scorer prediction", () => {
     expect(

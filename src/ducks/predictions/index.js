@@ -23,13 +23,19 @@ function predictions(state = initialState, action) {
   const { leagueName } = action.payload ? action.payload : { leagueName: null };
   switch (action.type) {
     case SET_PREDICTION:
-      const current = state.predictions[leagueName] || [];
+      const current = state.predictions[leagueName] || {};
       return {
         ...state,
         predictions: {
           ...state.predictions,
           [leagueName]: {
-            ...current,
+            ...Object.keys(current).reduce(
+              (acc, val) =>
+                action.payload.teamName === current[val].teamName
+                  ? { ...acc }
+                  : { ...acc, [val]: current[val] },
+              {}
+            ),
             [action.payload.place]: { ...action.payload }
           }
         }
