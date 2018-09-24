@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import leagues from "./leagues";
+import predictions from "./predictions";
 
 const rootReducer = combineReducers({
-  leagues
+  leagues,
+  predictions
 });
 
 export default rootReducer;

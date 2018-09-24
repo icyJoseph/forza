@@ -78,7 +78,8 @@ export class League extends Component {
     }
 
     const { leagueName = "", country = "", teams = [] } = league;
-    const playersTree = buildPlayersTree(teams);
+    const playersTree = buildPlayersTree(teams, leagueName);
+
     const players = Object.keys(playersTree).reduce(
       (acc, player) => acc.concat(playersTree[player]),
       []
@@ -114,7 +115,15 @@ export class League extends Component {
             />
           </CardContainer>
         )}
-        {open && <Prediction callback={this.closePredictionMaker} hook={id} />}
+        {open && (
+          <Prediction
+            player={playersTree[id]}
+            leagueName={league.leagueName}
+            team={league.teams.find(team => team.teamName === id)}
+            close={this.closePredictionMaker}
+            hook={id}
+          />
+        )}
       </Fragment>
     );
   }

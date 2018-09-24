@@ -20,25 +20,29 @@ const initialState = {
 
 //reducer
 function predictions(state = initialState, action) {
-  const { league } = action.payload;
+  const { leagueName } = action.payload ? action.payload : { leagueName: null };
   switch (action.type) {
     case SET_PREDICTION:
-      const current = state.predictions[league] || [];
+      const current = state.predictions[leagueName] || [];
       return {
         ...state,
         predictions: {
           ...state.predictions,
-          [league]: current.concat({
-            ...action.payload,
-            league
+          [leagueName]: current.concat({
+            ...action.payload
           })
         }
       };
     case SET_TOPSCORER:
       return {
         ...state,
-        topScorer: { ...state.topScorer, [league]: action.payload.playerName }
+        topScorer: {
+          ...state.topScorer,
+          [leagueName]: { ...action.payload, leagueName }
+        }
       };
+    default:
+      return state;
   }
 }
 
