@@ -1,19 +1,20 @@
 import React from "react";
 import styled, { css } from "styled-components";
-
 import Paper from "@material-ui/core/Paper";
 
 const commonCard = css`
   padding: 10px 0 10px 0;
   margin: 10px;
-  min-width: 150px;
-  max-width: 200px;
   flex: 1;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 `;
 
 const CardWrap = styled(Paper).attrs({
@@ -22,6 +23,13 @@ const CardWrap = styled(Paper).attrs({
   })
 })`
   ${commonCard};
+  min-width: 160px;
+  max-width: 160px;
+`;
+
+export const LeagueLabel = styled(CardWrap)`
+  min-width: 200px;
+  max-width: 200px;
 `;
 
 export const CardContainer = styled.div`
