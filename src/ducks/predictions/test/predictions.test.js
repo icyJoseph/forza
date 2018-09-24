@@ -5,10 +5,12 @@ describe("it handles user predictions", () => {
     expect(
       predictions(
         undefined,
-        setPrediction({ leagueName: "La", teamName: "A" }, 1)
+        setPrediction({ leagueName: "La", teamName: "A", teamId: 1 }, 1)
       )
     ).toEqual({
-      predictions: { La: { 1: { teamName: "A", place: 1, leagueName: "La" } } },
+      predictions: {
+        La: { 1: { teamName: "A", place: 1, leagueName: "La", teamId: 1 } }
+      },
       topScorer: ""
     });
   });
@@ -17,14 +19,16 @@ describe("it handles user predictions", () => {
       predictions(
         {
           predictions: {
-            La: { 1: { teamName: "A", place: 1, leagueName: "La" } }
+            La: { 1: { teamName: "A", place: 1, leagueName: "La", teamId: 1 } }
           },
           topScorer: ""
         },
-        setPrediction({ leagueName: "La", teamName: "A" }, 3)
+        setPrediction({ leagueName: "La", teamName: "A", teamId: 1 }, 3)
       )
     ).toEqual({
-      predictions: { La: { 3: { teamName: "A", place: 3, leagueName: "La" } } },
+      predictions: {
+        La: { 3: { teamName: "A", place: 3, leagueName: "La", teamId: 1 } }
+      },
       topScorer: ""
     });
   });

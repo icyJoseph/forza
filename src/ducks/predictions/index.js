@@ -18,24 +18,26 @@ const initialState = {
   topScorer: ""
 };
 
+// helpers
+const replaceTeams = (teamId, current) => (acc, val) =>
+  teamId === current[val].teamId ? { ...acc } : { ...acc, [val]: current[val] };
+
+const getPayload = ({ payload }) => (payload ? payload : { leagueName: null });
+
 //reducer
 function predictions(state = initialState, action) {
-  const { leagueName } = action.payload ? action.payload : { leagueName: null };
+  const { leagueName } = getPayload(action);
   switch (action.type) {
     case SET_PREDICTION:
       const current = state.predictions[leagueName] || {};
+      const { teamId } = action.payload;
+      const searchAndReplace = replaceTeams(teamId, current);
       return {
         ...state,
         predictions: {
           ...state.predictions,
           [leagueName]: {
-            ...Object.keys(current).reduce(
-              (acc, val) =>
-                action.payload.teamName === current[val].teamName
-                  ? { ...acc }
-                  : { ...acc, [val]: current[val] },
-              {}
-            ),
+            ...Object.keys(current).reduce(searchAndReplace, {}),
             [action.payload.place]: { ...action.payload }
           }
         }
