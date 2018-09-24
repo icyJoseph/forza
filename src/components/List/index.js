@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Card from "../Card";
+import { curry } from "../../helpers";
 
 const Flag = styled.div.attrs({
   style: ({ color }) => ({
@@ -14,7 +15,7 @@ const Flag = styled.div.attrs({
 `;
 
 export const Team = ({ teamName, teamColor, topPlayers, callback }) => (
-  <Card handler={callback}>
+  <Card id={teamName} handler={curry(callback)(teamName)}>
     {teamName}
     <Flag color={teamColor} />
     {topPlayers.map(({ playerName }) => (
@@ -30,7 +31,7 @@ export const Player = ({
   goalsLastSeason,
   callback
 }) => (
-  <Card handler={callback}>
+  <Card id={playerName} handler={curry(callback)(playerName)}>
     {playerName}
     {goalsLastSeason}
     {teamName}
