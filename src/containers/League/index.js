@@ -14,13 +14,7 @@ import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
 import { buildPlayersTree } from "../../helpers";
 
-const breakpoint = "(min-width: 599px)";
-
-const predictions = [
-  { team: "A", place: 1 },
-  { team: "B", place: 2 },
-  { team: "C", place: 3 }
-];
+const breakpoint = "(min-width: 685px)";
 
 export const PredictionContainer = styled.div`
   display: flex;
@@ -91,7 +85,7 @@ export class League extends Component {
           <LeagueLabel height={20}>
             {[`${country} - ${leagueName}`]}
           </LeagueLabel>
-          <Podium query={breakpoint} predictions={predictions} />
+          <Podium query={breakpoint} leagueName={leagueName} />
         </PredictionContainer>
         <StyledTabs value={value} onChange={this.handleChange} centered>
           <Tab label="Teams" />
