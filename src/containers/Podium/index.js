@@ -61,7 +61,7 @@ export class Podium extends Component {
 
     return (
       <Fragment>
-        <div style={{ margin: "0 auto", height: "32px" }}>
+        <div style={{ margin: "5px auto 0", height: "30px" }}>
           {topScorerForLeague
             ? topScorerForLeague.playerName
             : "Who'll be top scorer?"}

@@ -17,12 +17,10 @@ export const Position = styled.div`
 `;
 
 export const Place = styled.div.attrs({
-  style: ({ place, matches }) => {
-    return {
-      height: `${80 / place}%`,
-      width: matches ? "180px" : "95px"
-    };
-  }
+  style: ({ place, matches }) => ({
+    height: `${80 - place * 15}%`,
+    width: matches ? "180px" : "95px"
+  })
 })`
   display: flex;
   flex-direction: column;
