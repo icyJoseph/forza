@@ -28,7 +28,7 @@ const PlaceHolder = () => (
   </div>
 );
 
-class Podium extends Component {
+export class Podium extends Component {
   state = { matches: true };
 
   componentDidMount() {

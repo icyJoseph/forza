@@ -4,14 +4,16 @@ describe("it handles actions", () => {
   it("has initial state, and returns it by default", () => {
     expect(leagues(undefined, { type: "invalid" })).toEqual({
       allLeagues: [],
-      loading: false
+      loading: false,
+      error: false
     });
   });
 
   it("handles fetching", () => {
     expect(leagues(undefined, onFetchLeagueData)).toEqual({
       allLeagues: [],
-      loading: true
+      loading: true,
+      error: false
     });
   });
 
@@ -21,7 +23,8 @@ describe("it handles actions", () => {
       leagues({ allLeagues: [], loading: true }, onSuccessLeagueData(seed))
     ).toEqual({
       allLeagues: seed,
-      loading: false
+      loading: false,
+      error: false
     });
   });
 });
