@@ -1,5 +1,6 @@
 const SET_PREDICTION = "prediction set";
 const SET_TOPSCORER = "prediction top scorer";
+const RESET_PREDICTION = "prediction reset";
 
 //actions
 export const setPrediction = (team, place) => ({
@@ -12,10 +13,15 @@ export const setTopScorer = player => ({
   payload: player
 });
 
+export const resetAll = leagueName => ({
+  type: RESET_PREDICTION,
+  payload: { leagueName }
+});
+
 //initial state
 const initialState = {
   predictions: {},
-  topScorer: ""
+  topScorer: {}
 };
 
 // helpers
@@ -49,6 +55,14 @@ function predictions(state = initialState, action) {
           ...state.topScorer,
           [leagueName]: { ...action.payload, leagueName }
         }
+      };
+    case RESET_PREDICTION:
+      const { [leagueName]: omit, ...otherPredictions } = state.predictions;
+      const { [leagueName]: omit2, ...otherTopScorers } = state.topScorer;
+      return {
+        ...state,
+        predictions: { ...otherPredictions },
+        topScorer: { ...otherTopScorers }
       };
     default:
       return state;

@@ -9,7 +9,7 @@ import BackButton from "./containers/BackButton";
 const Router = () => (
   <BrowserRouter>
     <Fragment>
-      <Route path="/" component={TopMenu} />
+      <Route path="/:league?" component={TopMenu} />
       <Switch>
         <Route exact path="/:league" component={League} />
         <Route path="/" component={Landing} />
