@@ -28,9 +28,10 @@ function predictions(state = initialState, action) {
         ...state,
         predictions: {
           ...state.predictions,
-          [leagueName]: current.concat({
-            ...action.payload
-          })
+          [leagueName]: {
+            ...current,
+            [action.payload.place]: { ...action.payload }
+          }
         }
       };
     case SET_TOPSCORER:
