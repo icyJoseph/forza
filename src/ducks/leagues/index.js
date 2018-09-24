@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // constants
-const url = "http://192.168.0.4:1337/";
+const url = "http://localhost:1337/";
 
 // action types
 const FETCH_LEAGUES_DATA = "leagues fetch";

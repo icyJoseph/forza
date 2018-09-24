@@ -1,17 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import styled from "styled-components";
 
-import "./portal.css";
+const PortalWrap = styled.div`
+  position: absolute;
+  margin-top: -50px;
+  width: 160px;
+  z-index: 10;
+`;
 
-export default ({ children, callback }) => {
-  const Portal = (
-    <div className="Modal-container" onClick={callback}>
-      <div className="Modal-content" onClick={e => e.stopPropagation()}>
-        {children}
-        <button onClick={callback}> Close</button>
-      </div>
-    </div>
-  );
+export default ({ children, hook }) => {
+  const elem = document.getElementById(hook);
+  const Portal = <PortalWrap>{children}</PortalWrap>;
 
-  return ReactDOM.createPortal(Portal, document.body);
+  return ReactDOM.createPortal(Portal, elem);
 };

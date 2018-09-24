@@ -6,8 +6,9 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
 import Podium from "../../containers/Podium";
+import Prediction from "../../containers/Prediction";
 
-import Card, { CardContainer } from "../../components/Card";
+import { CardContainer, LeagueLabel } from "../../components/Card";
 import List from "../../components/List";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
@@ -33,10 +34,38 @@ export const StyledTabs = styled(Tabs)`
 
 export class League extends Component {
   state = {
-    value: 0
+    value: 0,
+    open: false,
+    id: null
   };
+  root = null;
+
+  componentDidMount() {
+    this.root = document.getElementById("root");
+  }
 
   handleChange = (e, value) => this.setState({ value });
+
+  bubbleHandler = e => {
+    const source = e.path.find(elem => elem.id === this.state.id);
+    return !source ? this.closePredictionMaker() : null;
+  };
+
+  openPredictionMaker = id => {
+    this.root.addEventListener("click", this.bubbleHandler);
+    return this.setState({
+      open: true,
+      id
+    });
+  };
+
+  closePredictionMaker = () => {
+    this.root.removeEventListener("click", this.bubbleHandler);
+    return this.setState({
+      open: false,
+      id: null
+    });
+  };
 
   render() {
     const league = this.props.allLeagues.find(
@@ -54,11 +83,13 @@ export class League extends Component {
       (acc, player) => acc.concat(playersTree[player]),
       []
     );
-    const { value } = this.state;
+    const { value, open, id } = this.state;
     return (
       <Fragment>
         <PredictionContainer>
-          <Card height={20}>{[`${country} - ${leagueName}`]}</Card>
+          <LeagueLabel height={20}>
+            {[`${country} - ${leagueName}`]}
+          </LeagueLabel>
           <Podium query={breakpoint} predictions={predictions} />
         </PredictionContainer>
         <StyledTabs value={value} onChange={this.handleChange} centered>
@@ -67,14 +98,23 @@ export class League extends Component {
         </StyledTabs>
         {value === 0 && (
           <CardContainer>
-            <List items={teams} type="teams" />
+            <List
+              items={teams}
+              type="teams"
+              callback={this.openPredictionMaker}
+            />
           </CardContainer>
         )}
         {value === 1 && (
           <CardContainer>
-            <List items={players} type="players" />
+            <List
+              items={players}
+              type="players"
+              callback={this.openPredictionMaker}
+            />
           </CardContainer>
         )}
+        {open && <Prediction callback={this.closePredictionMaker} hook={id} />}
       </Fragment>
     );
   }
