@@ -19,8 +19,8 @@ export const Position = styled.div`
 export const Place = styled.div.attrs({
   style: ({ place, matches }) => {
     return {
-      height: `${70 / place}%`,
-      width: matches ? "180px" : "90px"
+      height: `${80 / place}%`,
+      width: matches ? "180px" : "95px"
     };
   }
 })`
