@@ -20,7 +20,7 @@ ShallowWrapper {
       "children": <Unknown>
         <Route
                 component={[Function]}
-                path="/"
+                path="/:league?"
         />
         <Switch>
                 <Route
@@ -48,7 +48,7 @@ ShallowWrapper {
         "children": Array [
           <Route
             component={[Function]}
-            path="/"
+            path="/:league?"
 />,
           <Switch>
             <Route
@@ -75,7 +75,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "component": [Function],
-            "path": "/",
+            "path": "/:league?",
           },
           "ref": null,
           "rendered": null,
@@ -154,7 +154,7 @@ ShallowWrapper {
         "children": <Unknown>
           <Route
                     component={[Function]}
-                    path="/"
+                    path="/:league?"
           />
           <Switch>
                     <Route
@@ -182,7 +182,7 @@ ShallowWrapper {
           "children": Array [
             <Route
               component={[Function]}
-              path="/"
+              path="/:league?"
 />,
             <Switch>
               <Route
@@ -209,7 +209,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "component": [Function],
-              "path": "/",
+              "path": "/:league?",
             },
             "ref": null,
             "rendered": null,
