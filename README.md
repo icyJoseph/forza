@@ -2,7 +2,7 @@
 
 Build as part of a coding challenge for Forza Football
 
-**Challenge**
+## Challenge
 
 The new football season brings with it a sense of excitement among fans as everything
 starts again. At this time of year many fans enjoy making predictions about how the
@@ -22,3 +22,30 @@ Note:​ Remember that this is just a small project to get something for us to d
 together, you don’t need to spend days on this. If you find stuff that you would like to improve in
 your solution after sending it to us, write it down and bring your own feedback to the
 presentation.
+
+## Solution
+
+The proposed solution is a React-Redux application.
+
+### React Tree
+
+The application layout is as follows:
+
+```jsx
+<Provider>
+  <Routes>
+    <Landing />
+    <League />
+    <BottomMenu />
+    <Predictions />
+  </Routes>
+</Provider>
+```
+
+### Redux Store
+
+### User Interaction
+
+### Asumptions
+
+### Purpose
