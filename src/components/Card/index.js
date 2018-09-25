@@ -23,8 +23,8 @@ const CardWrap = styled(Paper).attrs({
   })
 })`
   ${commonCard};
-  min-width: 160px;
-  max-width: 160px;
+  min-width: 170px;
+  max-width: 170px;
 `;
 
 export const LeagueLabel = styled(CardWrap)`
