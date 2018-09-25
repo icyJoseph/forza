@@ -2,7 +2,8 @@ import axios from "axios";
 import { efficientReformat } from "./helpers";
 
 // constants -> change to process env later on
-const url = "http://localhost:1337/large";
+// const url = "http://localhost:1337/large";
+const url = "http://localhost:1337/";
 
 // action types
 const FETCH_LEAGUES_DATA = "leagues fetch";
@@ -48,7 +49,7 @@ export const mapFetchAction = dispatch => ({
 
 // initial state
 const initialState = {
-  allLeagues: [],
+  allLeagues: {},
   loading: false,
   error: false
 };
