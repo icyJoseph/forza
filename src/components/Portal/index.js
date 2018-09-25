@@ -7,6 +7,8 @@ const PortalWrap = styled.div`
   margin-top: -50px;
   width: 160px;
   z-index: 10;
+  display: flex;
+  justify-content: space-evenly;
 `;
 
 export default ({ children, hook }) => {
