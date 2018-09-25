@@ -44,12 +44,35 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const Card = ({ children, handler, id, current }) => {
+export const Wrap = styled.div.attrs({
+  style: ({ index, title, highlight }) => ({
+    fontSize: index === title ? "14pt" : "12pt",
+    color: highlight !== -1 ? "dodgerblue" : "black"
+  })
+})`
+  padding: 2px;
+`;
+
+export const Card = ({
+  children,
+  handler,
+  id,
+  current,
+  title = 0,
+  highlight = [1, 4]
+}) => {
   const elevation = id === current ? 24 : 3;
   return (
     <CardWrap onClick={handler} elevation={elevation} id={id}>
       {children.map((child, index) => (
-        <div key={`card-child-${index}-of-${children.length}`}>{child}</div>
+        <Wrap
+          key={`card-child-${index}-of-${children.length}`}
+          title={title}
+          index={index}
+          highlight={highlight.indexOf(index)}
+        >
+          {child}
+        </Wrap>
       ))}
     </CardWrap>
   );

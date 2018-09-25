@@ -46,10 +46,18 @@ export class Landing extends Component {
         {CustomHeader(" Which league would you like to predict?", "subheading")}
         <CardContainer>
           {Object.keys(allLeagues).map(leagueId => (
-            <Card key={leagueId} handler={curry(this.goToLeague)(leagueId)}>
+            <Card
+              key={leagueId}
+              handler={curry(this.goToLeague)(leagueId)}
+              title={0}
+              highlight={[1, 4]}
+            >
               {allLeagues[leagueId].leagueName}
               {allLeagues[leagueId].country}
               {`${allLeagues[leagueId].teams.length} Teams`}
+              {"Top Players scored"}
+              {`${allLeagues[leagueId].leagueGoalsLastSeason}`}
+              {"goals last season"}
             </Card>
           ))}
         </CardContainer>
