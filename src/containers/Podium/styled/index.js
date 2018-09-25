@@ -8,7 +8,6 @@ const common = css`
 `;
 
 export const Name = styled.div`
-  ${common};
   align-items: center;
 `;
 
@@ -29,16 +28,18 @@ export const Place = styled(Paper).attrs({
   text-align: center;
   padding: 5px;
   margin: 10px;
-  width: 80px;
-  width: 95px @media (min-width: 685px) {
-    width: 180px;
+  min-width: 80px;
+  max-width: 90px;
+  word-wrap: break-word;
+  @media (min-width: 685px) {
+    width: 140px;
   }
 `;
 
 export const PodiumWrapper = styled(Paper)`
   width: 80%;
   margin: 0 auto;
-  height: 150px;
+  height: 180px;
   display: flex;
   flex-direction: column;
   justify-content: center;

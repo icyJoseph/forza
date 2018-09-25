@@ -9,6 +9,7 @@ const commonCard = css`
   text-align: center;
   display: flex;
   flex-direction: column;
+  word-wrap: break-word;
   justify-content: space-around;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -19,7 +20,7 @@ const commonCard = css`
 
 const CardWrap = styled(Paper).attrs({
   style: ({ height }) => ({
-    height: height ? `${height}px` : "80px"
+    height: height ? `${height}px` : "auto"
   })
 })`
   ${commonCard};

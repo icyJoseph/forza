@@ -7,10 +7,12 @@ import podiumSorter from "./utils";
 
 const Stand = ({ place, teamName }) => {
   return (
-    <Place place={place} elevation={3}>
-      <Name>{teamName}</Name>
+    <div>
       <Position>{place}</Position>
-    </Place>
+      <Place place={place} elevation={3}>
+        <Name>{teamName}</Name>
+      </Place>
+    </div>
   );
 };
 
