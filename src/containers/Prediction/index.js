@@ -45,6 +45,24 @@ const MobileAnswerButton = ({ content, ...props }) => (
   </StyledMobileAnswerButton>
 );
 
+const SideLabel = ({ matches, content }) =>
+  !matches && (
+    <Paper
+      elevation={10}
+      style={{
+        position: "absolute",
+        minWidth: "100px",
+        right: "70px",
+        padding: "10px",
+        bottom: "10px",
+        background: "dodgerblue",
+        color: "white"
+      }}
+    >
+      {content}
+    </Paper>
+  );
+
 const places = [1, 2, 3];
 const TeamsButtonPad = ({ leagueName, team, matches, ...props }) => {
   const Buttons = places.map(place => {
@@ -65,18 +83,7 @@ const TeamsButtonPad = ({ leagueName, team, matches, ...props }) => {
   return (
     <Fragment>
       {Buttons}
-      {!matches && (
-        <Paper
-          style={{
-            position: "absolute",
-            right: "70px",
-            padding: "10px",
-            bottom: "10px"
-          }}
-        >
-          {team.teamName}
-        </Paper>
-      )}
+      <SideLabel matches={matches} content={team.teamName} />
     </Fragment>
   );
 };
@@ -87,20 +94,29 @@ const AnswerTopScorer = ({ setTopScorer, player, answer, close }) => {
   return close();
 };
 
-const PlayersButtonPad = ({ matches, ...props }) =>
-  [{ answer: YES, background: "green" }, { answer: NO, background: "red" }].map(
-    ({ answer, background }) => {
-      const Component = matches ? AnswerButton : MobileAnswerButton;
-      return (
-        <Component
-          key={answer}
-          content={answer}
-          background={background}
-          onClick={curry(AnswerTopScorer)({ answer, ...props })}
-        />
-      );
-    }
+const PlayersButtonPad = ({ matches, ...props }) => {
+  const Buttons = [
+    { answer: YES, background: "green" },
+    { answer: NO, background: "red" }
+  ].map(({ answer, background }) => {
+    const Component = matches ? AnswerButton : MobileAnswerButton;
+    return (
+      <Component
+        key={answer}
+        content={answer}
+        background={background}
+        onClick={curry(AnswerTopScorer)({ answer, ...props })}
+      />
+    );
+  });
+
+  return (
+    <Fragment>
+      {Buttons}
+      <SideLabel matches={matches} content={props.player.playerName} />
+    </Fragment>
   );
+};
 
 const Prediction = ({
   player,
