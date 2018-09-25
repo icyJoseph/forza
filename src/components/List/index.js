@@ -14,8 +14,14 @@ const Flag = styled.div.attrs({
   margin: 3px auto;
 `;
 
-export const Team = ({ teamName, teamColor, topPlayers, callback }) => (
-  <Card id={teamName} handler={curry(callback)(teamName)}>
+export const Team = ({
+  teamName,
+  teamColor,
+  topPlayers,
+  callback,
+  current
+}) => (
+  <Card id={teamName} handler={curry(callback)(teamName)} current={current}>
     {teamName}
     <Flag color={teamColor} />
     {topPlayers.map(({ playerName }) => (
@@ -29,9 +35,10 @@ export const Player = ({
   teamName,
   teamColor,
   goalsLastSeason,
-  callback
+  callback,
+  current
 }) => (
-  <Card id={playerName} handler={curry(callback)(playerName)}>
+  <Card id={playerName} handler={curry(callback)(playerName)} current={current}>
     {playerName}
     {goalsLastSeason}
     {teamName}
@@ -39,10 +46,17 @@ export const Player = ({
   </Card>
 );
 
-export const ListContainer = ({ items, callback, type = "team" }) =>
+export const ListContainer = ({ items, callback, type = "team", current }) =>
   items.map((item, index) => {
     const Component = type === "players" ? Player : Team;
-    return <Component key={`${type}-${index}`} {...item} callback={callback} />;
+    return (
+      <Component
+        key={`${type}-${index}`}
+        {...item}
+        callback={callback}
+        current={current}
+      />
+    );
   });
 
 export default ListContainer;

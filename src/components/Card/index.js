@@ -43,12 +43,15 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const Card = ({ children, handler, ...style }) => (
-  <CardWrap onClick={handler} elevation={3} {...style}>
-    {children.map((child, index) => (
-      <div key={`card-child-${index}-of-${children.length}`}>{child}</div>
-    ))}
-  </CardWrap>
-);
+export const Card = ({ children, handler, id, current }) => {
+  const elevation = id === current ? 24 : 3;
+  return (
+    <CardWrap onClick={handler} elevation={elevation} id={id}>
+      {children.map((child, index) => (
+        <div key={`card-child-${index}-of-${children.length}`}>{child}</div>
+      ))}
+    </CardWrap>
+  );
+};
 
 export default Card;

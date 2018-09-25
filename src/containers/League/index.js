@@ -117,6 +117,7 @@ export class League extends Component {
               items={teams}
               type="teams"
               callback={this.openPredictionMaker}
+              current={id}
             />
           </CardContainer>
         )}
@@ -126,6 +127,7 @@ export class League extends Component {
               items={players}
               type="players"
               callback={this.openPredictionMaker}
+              current={id}
             />
           </CardContainer>
         )}
