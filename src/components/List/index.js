@@ -40,7 +40,7 @@ export const Player = ({
 }) => (
   <Card id={playerName} handler={curry(callback)(playerName)} current={current}>
     {playerName}
-    {goalsLastSeason}
+    {`Last season: ${goalsLastSeason} goals`}
     {teamName}
     <Flag color={teamColor} />
   </Card>
