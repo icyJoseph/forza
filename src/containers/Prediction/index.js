@@ -10,7 +10,7 @@ import { curry } from "../../helpers";
 
 const StyledAnswerButton = styled(Button).attrs({
   style: ({ middle, background }) => ({
-    marginTop: middle === 2 ? "-20px" : "0px",
+    marginTop: middle !== 2 ? "-20px" : "0px",
     background: background ? background : "gray"
   })
 })`
