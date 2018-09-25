@@ -13,7 +13,7 @@ import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
 import { buildPlayersTree, goHome } from "../../helpers";
 
-const breakpoint = "(min-width: 685px)";
+const breakpoint = "(min-width: 785px)";
 const topMenuBreakPoint = "(min-width: 600px)";
 
 export const PredictionContainer = styled.div`
@@ -23,7 +23,6 @@ export const PredictionContainer = styled.div`
   flex-direction: column;
   padding-top:10px;
   margin-bottom: 20px;
-  background: #fbfcfa;
   z-index: 20;
 `;
 
