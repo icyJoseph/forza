@@ -47,7 +47,7 @@ export const TopMenu = ({ match, allLeagues, history, classes, resetAll }) => {
           <Fragment>
             <Button color="inherit">Share</Button>
             <Button color="inherit" onClick={curry(resetAll)(leagueName)}>
-              Reset
+              Clear
             </Button>
           </Fragment>
         )}
