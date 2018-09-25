@@ -15,11 +15,16 @@ import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 import { buildPlayersTree } from "../../helpers";
 
 const breakpoint = "(min-width: 685px)";
+const topMenuBreakPoint = "(min-width: 600px)";
 
 export const PredictionContainer = styled.div`
+  position: sticky;
+  top: ${props => props.top}
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  background: #fbfcfa;
+  z-index: 20;
 `;
 
 export const StyledTabs = styled(Tabs)`
@@ -30,14 +35,29 @@ export class League extends Component {
   state = {
     value: 0,
     open: false,
-    id: null
+    id: null,
+    top: 56
   };
+
   root = null;
 
   componentDidMount() {
     this.root = document.getElementById("root");
+
+    const targetWindow = this.props.targetWindow || window;
+    // get the matchMedia function
+    this.mediaQueryList = targetWindow.matchMedia(topMenuBreakPoint);
+    // listen to updates
+    this.mediaQueryList.addListener(this.updateMatches);
+    // are we matching?
+    return this.updateMatches();
   }
 
+  updateMatches = () => {
+    const menu = document.getElementById("TopMenu");
+    const top = window.getComputedStyle(menu).height;
+    return this.setState({ top });
+  };
   handleChange = (e, value) => this.setState({ value });
 
   bubbleHandler = e => {
@@ -78,10 +98,10 @@ export class League extends Component {
       (acc, player) => acc.concat(playersTree[player]),
       []
     );
-    const { value, open, id } = this.state;
+    const { value, open, id, top } = this.state;
     return (
       <Fragment>
-        <PredictionContainer>
+        <PredictionContainer top={top}>
           <LeagueLabel height={20}>
             {[`${country} - ${leagueName}`]}
           </LeagueLabel>
