@@ -55,6 +55,10 @@ export class League extends Component {
     return this.updateMatches();
   }
 
+  componentWillUnmount() {
+    this.mediaQueryList.removeListener(this.updateMatches);
+  }
+
   updateMatches = () => {
     const menu = document.getElementById("TopMenu");
     const top = window.getComputedStyle(menu).height;
