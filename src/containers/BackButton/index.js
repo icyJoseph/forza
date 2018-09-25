@@ -18,6 +18,7 @@ const Pinned = styled.div`
   bottom: 70px;
   right: 15px;
   display: flex;
+  z-index: 30;
   flex-direction: column-reverse;
 `;
 
