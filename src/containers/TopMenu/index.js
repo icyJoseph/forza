@@ -16,6 +16,7 @@ const baseStyle = css`
 
 const MainTitle = styled(Typography)`
   ${baseStyle};
+  cursor: pointer;
 `;
 
 const Bar = styled(AppBar)`
