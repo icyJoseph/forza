@@ -8,21 +8,26 @@ import { curry } from "../../helpers";
 import logo from "../../logo.png";
 
 const HeaderSegment = styled.div`
-  margin: 20px auto;
+  margin: 15px auto 2px;
   text-align: center;
 `;
 
-const CustomHeader = (Message, variant) => (
-  <HeaderSegment>
-    <Typography variant={variant} gutterBottom>
-      {Message}
-    </Typography>
-  </HeaderSegment>
-);
+const CustomHeader = (Message, variant, split = false) => {
+  const messageArr = split ? Message.split(" ") : [Message];
+  return (
+    <HeaderSegment>
+      {messageArr.map(message => (
+        <Typography key={message} variant={variant}>
+          {message}
+        </Typography>
+      ))}
+    </HeaderSegment>
+  );
+};
 
 const ImageHeader = logo => (
   <HeaderSegment>
-    <img src={logo} alt="Predictions!" />
+    <img src={logo} alt="Predictions!" style={{ marginTop: "10px" }} />
   </HeaderSegment>
 );
 
@@ -40,8 +45,7 @@ export class Landing extends Component {
     const { allLeagues } = this.props;
     return (
       <Fragment>
-        {CustomHeader("Forza", "display3")}
-        {CustomHeader("Challenge", "display2")}
+        {CustomHeader("FORZA CHALLENGE", "display2", true)}
         {ImageHeader(logo)}
         {CustomHeader(" Which league would you like to predict?", "subheading")}
         <CardContainer>
