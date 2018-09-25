@@ -86,10 +86,11 @@ export class League extends Component {
   handleChange = (e, value) => this.setState({ value });
 
   bubbleHandler = e => {
-    const source = e.path.find(
-      elem => elem.id === this.state.id || elem.id === "@pinned"
-    );
-    return !source ? this.closePredictionMaker() : null;
+    const source =
+      e &&
+      e.path &&
+      e.path.find(elem => elem.id === this.state.id || elem.id === "@pinned");
+    return !source && e.path ? this.closePredictionMaker() : null;
   };
 
   openPredictionMaker = id => {
