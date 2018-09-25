@@ -91,7 +91,7 @@ export class League extends Component {
     const league = this.props.allLeagues[this.props.match.params.league];
 
     if (!league) {
-      this.props.fetch();
+      if (!this.props.loading) this.props.fetch();
       return <div>Just one sec...</div>;
     }
 
