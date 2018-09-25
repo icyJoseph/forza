@@ -19,7 +19,7 @@ export const Position = styled.div`
 
 export const Place = styled(Paper).attrs({
   style: ({ place, open }) => ({
-    height: open ? `${100 - place * 15}px` : "30px"
+    height: open ? `${100 - place * 15}px` : "40px"
   })
 })`
   transition: height 0.5s ease;
@@ -36,11 +36,15 @@ export const Place = styled(Paper).attrs({
     min-width: 160px;
     max-width: 160px;
   }
+  @media (min-width: 400px) {
+    min-width: 110px;
+    max-width: 110px;
+  }
 `;
 
 export const PodiumWrapper = styled(Paper).attrs({
   style: ({ open }) => ({
-    height: open ? "180px" : "100px"
+    height: open ? "180px" : "110px"
   })
 })`
   transition: height 0.5s ease;
