@@ -8,6 +8,7 @@ const common = css`
 `;
 
 export const Name = styled.div`
+  text-align: center;
   align-items: center;
 `;
 
@@ -17,29 +18,34 @@ export const Position = styled.div`
 `;
 
 export const Place = styled(Paper).attrs({
-  style: ({ place }) => ({
-    height: `${100 - place * 15}px`
+  style: ({ place, open }) => ({
+    height: open ? `${100 - place * 15}px` : "30px"
   })
 })`
+  transition: height 0.5s ease;
   display: flex;
   flex-direction: column;
   align-content: stretch;
   border-radius: 15px 0px;
   text-align: center;
-  padding: 5px;
-  margin: 10px;
-  min-width: 80px;
-  max-width: 90px;
+  margin: 0 5px;
+  min-width: 150px;
+  max-width: 150px;
   word-wrap: break-word;
   @media (min-width: 685px) {
-    width: 140px;
+    width: 180px;
   }
 `;
 
-export const PodiumWrapper = styled(Paper)`
+export const PodiumWrapper = styled(Paper).attrs({
+  style: ({ open }) => ({
+    height: open ? "180px" : "100px"
+  })
+})`
+  transition: height 0.5s ease;
   width: 80%;
   margin: 0 auto;
-  height: 180px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
