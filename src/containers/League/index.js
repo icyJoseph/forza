@@ -2,8 +2,6 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import Podium from "../../containers/Podium";
@@ -89,7 +87,9 @@ export class League extends Component {
   handleChange = (e, value) => this.setState({ value });
 
   bubbleHandler = e => {
-    const source = e.path.find(elem => elem.id === this.state.id);
+    const source = e.path.find(
+      elem => elem.id === this.state.id || elem.id === "@pinned"
+    );
     return !source ? this.closePredictionMaker() : null;
   };
 

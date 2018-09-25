@@ -18,20 +18,11 @@ const Pinned = styled.div`
   bottom: 70px;
   right: 15px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 `;
 
 export const BackButton = ({ toggle, sorting, classes, history }) => (
-  <Pinned>
-    <Button
-      variant="fab"
-      color={sorting ? "primary" : "secondary"}
-      className={classes.button}
-      aria-label="Sort By Goals"
-      onClick={toggle}
-    >
-      <img src={logo} alt="Predictions!" width="30px" />
-    </Button>
+  <Pinned id="@pinned">
     <Button
       variant="fab"
       color="primary"
@@ -40,6 +31,15 @@ export const BackButton = ({ toggle, sorting, classes, history }) => (
       onClick={curry(goHome)(history)}
     >
       <NavigateBefore fontSize="large" />
+    </Button>
+    <Button
+      variant="fab"
+      color={sorting ? "primary" : "secondary"}
+      className={classes.button}
+      aria-label="Sort By Goals"
+      onClick={toggle}
+    >
+      <img src={logo} alt="Predictions!" width="30px" />
     </Button>
   </Pinned>
 );
