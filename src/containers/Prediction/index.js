@@ -50,11 +50,12 @@ const SideLabel = ({ matches, content }) =>
     <Paper
       elevation={10}
       style={{
-        position: "absolute",
+        position: "fixed",
+        left: "50%",
+        transform: "translate(-50%, 0)",
         minWidth: "100px",
-        right: "70px",
         padding: "10px",
-        bottom: "10px",
+        bottom: "70px",
         background: "dodgerblue",
         color: "white"
       }}
@@ -95,19 +96,19 @@ const AnswerTopScorer = ({ setTopScorer, player, answer, close }) => {
 };
 
 const PlayersButtonPad = ({ matches, ...props }) => {
-  const Buttons = [{ answer: YES, background: "green" }, { answer: NO }].map(
-    ({ answer, background }) => {
-      const Component = matches ? AnswerButton : MobileAnswerButton;
-      return (
-        <Component
-          key={answer}
-          content={answer}
-          background={background}
-          onClick={curry(AnswerTopScorer)({ answer, ...props })}
-        />
-      );
-    }
-  );
+  const Pads = [{ answer: NO }, { answer: YES, background: "green" }];
+  const toUse = matches ? Pads.slice(0).reverse() : Pads;
+  const Buttons = toUse.map(({ answer, background }) => {
+    const Component = matches ? AnswerButton : MobileAnswerButton;
+    return (
+      <Component
+        key={answer}
+        content={answer}
+        background={background}
+        onClick={curry(AnswerTopScorer)({ answer, ...props })}
+      />
+    );
+  });
 
   return (
     <Fragment>
