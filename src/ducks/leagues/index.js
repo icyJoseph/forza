@@ -1,8 +1,8 @@
 import axios from "axios";
 import { efficientReformat } from "./helpers";
 
-// constants
-const url = "http://localhost:1337/";
+// constants -> change to process env later on
+const url = "http://localhost:1337/large";
 
 // action types
 const FETCH_LEAGUES_DATA = "leagues fetch";
