@@ -33,7 +33,7 @@ export const TopMenu = ({ match, allLeagues, history, classes, resetAll }) => {
   );
   const leagueName = league ? league.leagueName : null;
   return (
-    <Bar position="sticky" className={classes.bar}>
+    <Bar id="TopMenu" position="sticky" className={classes.bar}>
       <Toolbar>
         <MainTitle
           variant="title"
