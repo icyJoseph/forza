@@ -8,7 +8,11 @@ import Portal from "../../components/Portal";
 import { setPrediction, setTopScorer } from "../../ducks/predictions";
 import { curry } from "../../helpers";
 
-const StyledAnswerButton = styled(Button)`
+const StyledAnswerButton = styled(Button).attrs({
+  style: ({ middle }) => ({
+    marginTop: middle === 2 ? "-20px" : "0px"
+  })
+})`
   background: gray;
   bottom: 20px;
   margin: auto;
@@ -31,6 +35,7 @@ const TeamsButtonPad = ({ leagueName, team, ...props }) =>
   places.map(place => (
     <AnswerButton
       key={place}
+      middle={place}
       content={place}
       onClick={curry(AnswerPrediction)({
         payload: { leagueName, ...team },
