@@ -1,4 +1,5 @@
 import axios from "axios";
+import { efficientReformat } from "./helpers";
 
 // constants
 const url = "http://localhost:1337/";
@@ -23,8 +24,9 @@ export const onErroLeagueData = {
 };
 
 // selector
-export const mapAllLeaguesToProps = ({ leagues: { allLeagues } }) => ({
-  allLeagues
+export const mapAllLeaguesToProps = ({ leagues: { allLeagues, loading } }) => ({
+  allLeagues,
+  loading
 });
 
 // async handler
@@ -34,7 +36,8 @@ export const fetchLeagues = dispatch => {
   return axios
     .get(url)
     .then(({ data: { leagues } }) => leagues)
-    .then(res => dispatch(onSuccessLeagueData(res)))
+    .then(efficientReformat)
+    .then(allLeagues => dispatch(onSuccessLeagueData(allLeagues)))
     .catch(() => dispatch(onErroLeagueData));
 };
 
