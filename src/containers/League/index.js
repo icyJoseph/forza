@@ -12,7 +12,7 @@ import { CardContainer, LeagueLabel } from "../../components/Card";
 import List from "../../components/List";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
-import { buildPlayersTree } from "../../helpers";
+import { buildPlayersTree, goHome } from "../../helpers";
 
 const breakpoint = "(min-width: 685px)";
 const topMenuBreakPoint = "(min-width: 600px)";
@@ -36,7 +36,8 @@ export class League extends Component {
     value: 0,
     open: false,
     id: null,
-    top: 56
+    top: 56,
+    league: undefined
   };
 
   root = null;
@@ -45,6 +46,12 @@ export class League extends Component {
     this.root = document.getElementById("root");
     // take user to the top
     window.scrollTo(0, 0);
+    const league = this.props.allLeagues[this.props.match.params.league];
+    if (!league) {
+      this.props.fetch();
+    } else {
+      this.setState({ league });
+    }
 
     const targetWindow = this.props.targetWindow || window;
     // get the matchMedia function
@@ -53,6 +60,16 @@ export class League extends Component {
     this.mediaQueryList.addListener(this.updateMatches);
     // are we matching?
     return this.updateMatches();
+  }
+
+  componentDidUpdate() {
+    const league = this.props.allLeagues[this.props.match.params.league];
+    if (!league) {
+      return goHome(this.props.history);
+    } else if (this.state.league.leagueId !== league.leagueId) {
+      return this.setState({ league });
+    }
+    return null;
   }
 
   componentWillUnmount() {
@@ -88,10 +105,8 @@ export class League extends Component {
   };
 
   render() {
-    const league = this.props.allLeagues[this.props.match.params.league];
-
+    const { league } = this.state;
     if (!league) {
-      if (!this.props.loading) this.props.fetch();
       return <div>Just one sec...</div>;
     }
 
@@ -103,6 +118,7 @@ export class League extends Component {
       []
     );
     const { value, open, id, top } = this.state;
+    const { sorting } = this.props;
     return (
       <Fragment>
         <PredictionContainer top={top}>
@@ -122,6 +138,7 @@ export class League extends Component {
               type="teams"
               callback={this.openPredictionMaker}
               current={id}
+              sorting={sorting}
             />
           </CardContainer>
         )}
@@ -132,6 +149,7 @@ export class League extends Component {
               type="players"
               callback={this.openPredictionMaker}
               current={id}
+              sorting={sorting}
             />
           </CardContainer>
         )}
@@ -149,8 +167,13 @@ export class League extends Component {
   }
 }
 
+const combineMap = ({ sorting, ...rest }) => ({
+  ...mapAllLeaguesToProps(rest),
+  sorting
+});
+
 // Redux
 export default connect(
-  mapAllLeaguesToProps,
+  combineMap,
   mapFetchAction
 )(League);
