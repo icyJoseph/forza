@@ -45,11 +45,11 @@ export class Landing extends Component {
         {ImageHeader(logo)}
         {CustomHeader(" Which league would you like to predict?", "subheading")}
         <CardContainer>
-          {allLeagues.map(({ leagueId, leagueName, country, teams }) => (
+          {Object.keys(allLeagues).map(leagueId => (
             <Card key={leagueId} handler={curry(this.goToLeague)(leagueId)}>
-              {leagueName}
-              {country}
-              {`${teams.length} Teams`}
+              {allLeagues[leagueId].leagueName}
+              {allLeagues[leagueId].country}
+              {`${allLeagues[leagueId].teams.length} Teams`}
             </Card>
           ))}
         </CardContainer>

@@ -28,9 +28,8 @@ const barStyle = {
 
 export const TopMenu = ({ match, allLeagues, history, classes, resetAll }) => {
   const { params } = match;
-  const league = allLeagues.find(
-    league => league.leagueId === Number(params.league)
-  );
+  const league = allLeagues[params.league];
+
   const leagueName = league ? league.leagueName : null;
   return (
     <Bar id="TopMenu" position="sticky" className={classes.bar}>

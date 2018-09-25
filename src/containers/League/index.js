@@ -88,9 +88,7 @@ export class League extends Component {
   };
 
   render() {
-    const league = this.props.allLeagues.find(
-      league => league.leagueId === Number(this.props.match.params.league)
-    );
+    const league = this.props.allLeagues[this.props.match.params.league];
 
     if (!league) {
       this.props.fetch();
