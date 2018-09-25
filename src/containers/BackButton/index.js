@@ -44,7 +44,9 @@ export const BackButton = ({ toggle, sorting, classes, history }) => (
   </Pinned>
 );
 
+const mapToggleToProps = { toggle: toggleSort };
+
 export default connect(
   mapSortingToProps,
-  { toggle: toggleSort }
+  mapToggleToProps
 )(withStyles(buttonColor)(BackButton));
