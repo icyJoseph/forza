@@ -43,6 +43,8 @@ export class League extends Component {
 
   componentDidMount() {
     this.root = document.getElementById("root");
+    // take user to the top
+    window.scrollTo(0, 0);
 
     const targetWindow = this.props.targetWindow || window;
     // get the matchMedia function
