@@ -11,7 +11,7 @@ import { curry } from "../../helpers";
 const StyledAnswerButton = styled(Button).attrs({
   style: ({ middle, background }) => ({
     marginTop: middle !== 2 ? "-20px" : "0px",
-    background: background ? background : "gray"
+    background: background ? background : "dodgerblue"
   })
 })`
   bottom: 20px;
@@ -95,20 +95,19 @@ const AnswerTopScorer = ({ setTopScorer, player, answer, close }) => {
 };
 
 const PlayersButtonPad = ({ matches, ...props }) => {
-  const Buttons = [
-    { answer: YES, background: "green" },
-    { answer: NO, background: "red" }
-  ].map(({ answer, background }) => {
-    const Component = matches ? AnswerButton : MobileAnswerButton;
-    return (
-      <Component
-        key={answer}
-        content={answer}
-        background={background}
-        onClick={curry(AnswerTopScorer)({ answer, ...props })}
-      />
-    );
-  });
+  const Buttons = [{ answer: YES, background: "green" }, { answer: NO }].map(
+    ({ answer, background }) => {
+      const Component = matches ? AnswerButton : MobileAnswerButton;
+      return (
+        <Component
+          key={answer}
+          content={answer}
+          background={background}
+          onClick={curry(AnswerTopScorer)({ answer, ...props })}
+        />
+      );
+    }
+  );
 
   return (
     <Fragment>
