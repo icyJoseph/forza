@@ -29,11 +29,12 @@ export const Place = styled(Paper).attrs({
   border-radius: 15px 0px;
   text-align: center;
   margin: 0 5px;
-  min-width: 150px;
-  max-width: 150px;
+  min-width: 120px;
+  max-width: 120px;
   word-wrap: break-word;
   @media (min-width: 685px) {
-    width: 180px;
+    min-width: 160px;
+    max-width: 160px;
   }
 `;
 
@@ -43,7 +44,7 @@ export const PodiumWrapper = styled(Paper).attrs({
   })
 })`
   transition: height 0.5s ease;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   overflow: hidden;
   display: flex;
