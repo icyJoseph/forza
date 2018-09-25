@@ -18,15 +18,15 @@ export const Team = ({
   teamName,
   teamColor,
   topPlayers,
+  teamGoalsLastSeason,
   callback,
   current
 }) => (
   <Card id={teamName} handler={curry(callback)(teamName)} current={current}>
     {teamName}
     <Flag color={teamColor} />
-    {topPlayers.map(({ playerName }) => (
-      <div key={playerName}>{playerName}</div>
-    ))}
+    {`${topPlayers.length} top players`}
+    {`with ${teamGoalsLastSeason} goals last season`}
   </Card>
 );
 
@@ -40,14 +40,30 @@ export const Player = ({
 }) => (
   <Card id={playerName} handler={curry(callback)(playerName)} current={current}>
     {playerName}
-    {`Last season: ${goalsLastSeason} goals`}
+    {`${goalsLastSeason} goals last season`}
     {teamName}
     <Flag color={teamColor} />
   </Card>
 );
 
-export const ListContainer = ({ items, callback, type = "team", current }) =>
-  items.map((item, index) => {
+const goalCriteria = type => {
+  const key = type === "players" ? "goalsLastSeason" : "teamGoalsLastSeason";
+  return (a, b) => b[key] - a[key];
+};
+
+const sortList = (items, sorting, type) => {
+  const copy = items.slice(0);
+  return sorting ? copy.sort(goalCriteria(type)) : items;
+};
+
+export const ListContainer = ({
+  items,
+  callback,
+  type = "team",
+  current,
+  sorting
+}) =>
+  sortList(items, sorting, type).map((item, index) => {
     const Component = type === "players" ? Player : Team;
     return (
       <Component
