@@ -4,11 +4,12 @@ import styled from "styled-components";
 
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import Podium from "../../containers/Podium";
 import Prediction from "../../containers/Prediction";
 
-import { CardContainer, LeagueLabel } from "../../components/Card";
+import { CardContainer } from "../../components/Card";
 import List from "../../components/List";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
@@ -22,13 +23,17 @@ export const PredictionContainer = styled.div`
   top: ${props => props.top}
   display: flex;
   flex-direction: column;
+  padding-top:10px;
   margin-bottom: 20px;
   background: #fbfcfa;
   z-index: 20;
 `;
 
-export const StyledTabs = styled(Tabs)`
-  margin-bottom: 20px;
+export const StyledBottomNavigation = styled(BottomNavigation)`
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
 `;
 
 export class League extends Component {
@@ -36,7 +41,7 @@ export class League extends Component {
     value: 0,
     open: false,
     id: null,
-    top: 56,
+    top: "56px",
     league: undefined
   };
 
@@ -110,7 +115,7 @@ export class League extends Component {
       return <div>Just one sec...</div>;
     }
 
-    const { leagueName = "", country = "", teams = [] } = league;
+    const { leagueName = "", teams = [] } = league;
     const playersTree = buildPlayersTree(teams, leagueName);
 
     const players = Object.keys(playersTree).reduce(
@@ -122,15 +127,8 @@ export class League extends Component {
     return (
       <Fragment>
         <PredictionContainer top={top}>
-          <LeagueLabel height={20}>
-            {[`${country} - ${leagueName}`]}
-          </LeagueLabel>
           <Podium query={breakpoint} leagueName={leagueName} />
         </PredictionContainer>
-        <StyledTabs value={value} onChange={this.handleChange} centered>
-          <Tab label="Teams" />
-          <Tab label="Top Players" />
-        </StyledTabs>
         {value === 0 && (
           <CardContainer>
             <List
@@ -162,6 +160,14 @@ export class League extends Component {
             hook={id}
           />
         )}
+        <StyledBottomNavigation
+          showLabels
+          value={value}
+          onChange={this.handleChange}
+        >
+          <BottomNavigationAction label="Teams" />
+          <BottomNavigationAction label="Players" />
+        </StyledBottomNavigation>
       </Fragment>
     );
   }

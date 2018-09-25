@@ -22,7 +22,8 @@ const PlaceHolder = () => (
       display: "flex",
       flexDirection: "column",
       height: "150px",
-      justifyContent: "center"
+      justifyContent: "center",
+      alignItems: "center"
     }}
   >
     <div style={{ margin: "0 auto" }}>How will the league end?</div>
@@ -62,7 +63,7 @@ export class Podium extends Component {
     const topScorerForLeague = topScorer[leagueName];
 
     return (
-      <PodiumWrapper>
+      <PodiumWrapper elevation={10}>
         <div style={{ margin: "5px auto 0", height: "30px" }}>
           {topScorerForLeague
             ? `${topScorerForLeague.playerName} as top scorer!`

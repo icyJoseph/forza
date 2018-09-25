@@ -28,15 +28,10 @@ const CardWrap = styled(Paper).attrs({
   max-width: 170px;
 `;
 
-export const LeagueLabel = styled(CardWrap)`
-  min-width: 200px;
-  max-width: 200px;
-`;
-
 export const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding: 0 25px;
+  padding: 0 5px;
   justify-content: center;
   margin: 0 auto 100px;
   @media (min-width: 1000px) {

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const PortalWrap = styled.div`
   position: absolute;
-  margin-top: 90px;
+  margin-top: 50px;
   width: 170px;
   z-index: 10;
   display: flex;

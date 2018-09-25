@@ -15,8 +15,8 @@ const buttonColor = {
 const Pinned = styled.div`
   position: fixed;
   text-align: center;
-  bottom: 30px;
-  right: 30px;
+  bottom: 70px;
+  right: 15px;
   display: flex;
   flex-direction: column;
 `;

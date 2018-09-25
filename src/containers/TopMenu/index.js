@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled, { css } from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
@@ -31,6 +31,7 @@ export const TopMenu = ({ match, allLeagues, history, classes, resetAll }) => {
   const league = allLeagues[params.league];
 
   const leagueName = league ? league.leagueName : null;
+  const country = league ? league.country : null;
   return (
     <Bar id="TopMenu" position="sticky" className={classes.bar}>
       <Toolbar>
@@ -39,12 +40,16 @@ export const TopMenu = ({ match, allLeagues, history, classes, resetAll }) => {
           color="inherit"
           onClick={curry(goHome)(history)}
         >
-          Predictions
+          {!leagueName ? "Predictions" : `${leagueName} - ${country}`}
         </MainTitle>
-        <Button color="inherit">Share</Button>
-        <Button color="inherit" onClick={curry(resetAll)(leagueName)}>
-          Reset
-        </Button>
+        {leagueName && (
+          <Fragment>
+            <Button color="inherit">Share</Button>
+            <Button color="inherit" onClick={curry(resetAll)(leagueName)}>
+              Reset
+            </Button>
+          </Fragment>
+        )}
       </Toolbar>
     </Bar>
   );
