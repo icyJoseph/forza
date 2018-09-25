@@ -1,13 +1,13 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Place, PodiumWrapper, Name, Position } from "./styled";
 
 import podiumSorter from "./utils";
 
-const Stand = ({ place, teamName, matches }) => {
+const Stand = ({ place, teamName }) => {
   return (
-    <Place place={place} matches={matches}>
+    <Place place={place} elevation={3}>
       <Name>{teamName}</Name>
       <Position>{place}</Position>
     </Place>
@@ -19,12 +19,12 @@ const PlaceHolder = () => (
     style={{
       display: "flex",
       flexDirection: "column",
-      height: "200px",
+      height: "150px",
       justifyContent: "center"
     }}
   >
     <div style={{ margin: "0 auto" }}>How will the league end?</div>
-    <div style={{ margin: "0 auto" }}>Select from the list below :)</div>
+    <div style={{ margin: "0 auto" }}>Click on the teams below.</div>
   </div>
 );
 
@@ -60,23 +60,30 @@ export class Podium extends Component {
     const topScorerForLeague = topScorer[leagueName];
 
     return (
-      <Fragment>
+      <PodiumWrapper>
         <div style={{ margin: "5px auto 0", height: "30px" }}>
           {topScorerForLeague
-            ? topScorerForLeague.playerName
+            ? `${topScorerForLeague.playerName} as top scorer!`
             : "Who'll be top scorer?"}
         </div>
 
-        <PodiumWrapper matches={matches}>
-          {predictionsForLeague ? (
-            podiumSorter(matches, predictionsForLeague).map(team => (
-              <Stand key={team.teamName} {...team} matches={matches} />
-            ))
-          ) : (
-            <PlaceHolder />
-          )}
-        </PodiumWrapper>
-      </Fragment>
+        {predictionsForLeague ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "flex-end",
+              justifyContent: "center"
+            }}
+          >
+            {podiumSorter(matches, predictionsForLeague).map(team => (
+              <Stand key={team.teamName} {...team} />
+            ))}
+          </div>
+        ) : (
+          <PlaceHolder />
+        )}
+      </PodiumWrapper>
     );
   }
 }
