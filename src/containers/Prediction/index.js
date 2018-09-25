@@ -2,18 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
-
+import Typography from "@material-ui/core/Typography";
 import Portal from "../../components/Portal";
 
 import { setPrediction, setTopScorer } from "../../ducks/predictions";
 import { curry } from "../../helpers";
 
 const StyledAnswerButton = styled(Button).attrs({
-  style: ({ middle }) => ({
-    marginTop: middle === 2 ? "-20px" : "0px"
+  style: ({ middle, background }) => ({
+    marginTop: middle === 2 ? "-20px" : "0px",
+    background: background ? background : "gray"
   })
 })`
-  background: gray;
   bottom: 20px;
   margin: auto;
   color: white;
@@ -21,7 +21,7 @@ const StyledAnswerButton = styled(Button).attrs({
 
 const AnswerButton = ({ content, ...props }) => (
   <StyledAnswerButton variant="fab" mini {...props}>
-    {content}
+    <Typography color="secondary">{content}</Typography>
   </StyledAnswerButton>
 );
 
@@ -52,13 +52,16 @@ const AnswerTopScorer = ({ setTopScorer, player, answer, close }) => {
 };
 
 const PlayersButtonPad = ({ ...props }) =>
-  [YES, NO].map(answer => (
-    <AnswerButton
-      key={answer}
-      content={answer}
-      onClick={curry(AnswerTopScorer)({ answer, ...props })}
-    />
-  ));
+  [{ answer: YES, background: "green" }, { answer: NO, background: "red" }].map(
+    ({ answer, background }) => (
+      <AnswerButton
+        key={answer}
+        content={answer}
+        background={background}
+        onClick={curry(AnswerTopScorer)({ answer, ...props })}
+      />
+    )
+  );
 
 const Prediction = ({
   player,
