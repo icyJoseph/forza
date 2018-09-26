@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
-import {
-  Stand,
-  PodiumWrapper,
-  PlaceHolder,
-  TopScorer,
-  PredictionsForLeague
-} from "./styled";
+import { Stand } from "../../components/Stand";
+import { PlaceHolder } from "../../components/PlaceHolder";
+import { TopScorer } from "../../components/TopScorer";
+import { PodiumWrapper, FlexCenterContainer } from "../../components/Common";
 
 import podiumSorter from "./utils";
 import { setUpMediaQuery } from "../../helpers";
@@ -51,11 +47,11 @@ export class Podium extends Component {
       <PodiumWrapper elevation={10} open={open} onClick={this.togglePodium}>
         <TopScorer topScorerForLeague={topScorerForLeague} />
         {predictionsForLeague ? (
-          <PredictionsForLeague>
+          <FlexCenterContainer>
             {podiumSorter(matches, predictionsForLeague).map(team => (
               <Stand key={team.teamName} {...team} open={open} />
             ))}
-          </PredictionsForLeague>
+          </FlexCenterContainer>
         ) : (
           <PlaceHolder open={open} leagueName={leagueName} />
         )}

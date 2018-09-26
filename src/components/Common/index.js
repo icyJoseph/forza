@@ -1,12 +1,25 @@
-import React from "react";
 import styled, { css } from "styled-components";
 import Paper from "@material-ui/core/Paper";
-import Emoji from "../../../components/Emoji";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
 
 const common = css`
   display: flex;
   flex: 1;
   justify-content: center;
+`;
+
+const baseStyle = css`
+  flex-grow: 1;
+`;
+
+export const MainTitle = styled(Typography)`
+  ${baseStyle};
+  cursor: pointer;
+`;
+
+export const Bar = styled(AppBar)`
+  ${baseStyle};
 `;
 
 export const Name = styled.div`
@@ -70,29 +83,7 @@ export const CenteredDiv = styled.div`
   margin: 0 auto;
 `;
 
-export const PlaceHolder = ({ open, leagueName }) => (
-  <PlaceHolderContainer>
-    <CenteredDiv>{`How will the ${leagueName} end?`}</CenteredDiv>
-    <CenteredDiv>
-      Click on the teams. {!open && "Click here to expand."}
-    </CenteredDiv>
-  </PlaceHolderContainer>
-);
-
-export const Stand = ({ place, teamName, open }) => {
-  return (
-    <div>
-      <Position>
-        <Emoji place={place} />
-      </Position>
-      <Place place={place} elevation={3} open={open}>
-        <Name>{teamName}</Name>
-      </Place>
-    </div>
-  );
-};
-
-export const TopScorerContainer = styled.div`
+export const CommonContainer = styled.div`
   margin: 5px auto 0;
   height: 30px;
 `;
@@ -101,21 +92,7 @@ export const BlueSpan = styled.span`
   color: dodgerblue;
 `;
 
-export const TopScorer = ({ topScorerForLeague }) => (
-  <TopScorerContainer>
-    {topScorerForLeague ? (
-      <div>
-        <BlueSpan>{`${topScorerForLeague.playerName}`}</BlueSpan>
-        {" as top scorer! "}
-        <Emoji place="ball" />
-      </div>
-    ) : (
-      "Who'll be top scorer?"
-    )}
-  </TopScorerContainer>
-);
-
-export const PredictionsForLeague = styled.div`
+export const FlexCenterContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-end;

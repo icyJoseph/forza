@@ -1,27 +1,11 @@
 import React, { Fragment } from "react";
-import styled, { css } from "styled-components";
 import { connect } from "react-redux";
-import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
+import { Bar, MainTitle } from "../../components/Common";
 import { resetAll } from "../../ducks/predictions";
 import { curry, goHome } from "../../helpers";
 import { TOPMENU, SHARE, CLEAR } from "../../constants";
-
-const baseStyle = css`
-  flex-grow: 1;
-`;
-
-const MainTitle = styled(Typography)`
-  ${baseStyle};
-  cursor: pointer;
-`;
-
-const Bar = styled(AppBar)`
-  ${baseStyle};
-`;
 
 export const TopMenu = ({ match, allLeagues, history, classes, resetAll }) => {
   const { params } = match;
