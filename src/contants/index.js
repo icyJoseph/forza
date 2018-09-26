@@ -22,3 +22,7 @@ export const GO_BACK = "Go Back";
 // style props
 export const PRIMARY = "primary";
 export const SECONDARY = "secondary";
+
+// endpoints
+// change to process env later on
+export const url = "http://localhost:1337/";

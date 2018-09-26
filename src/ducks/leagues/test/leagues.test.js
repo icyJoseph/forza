@@ -1,9 +1,24 @@
-import leagues, { onFetchLeagueData, onSuccessLeagueData } from "../";
+import leagues, {
+  mapAllLeaguesToProps,
+  onFetchLeagueData,
+  onSuccessLeagueData,
+  onErroLeagueData
+} from "../";
 
-describe("it handles actions", () => {
+describe("selector", () => {
+  it("selects from the state", () => {
+    expect(
+      mapAllLeaguesToProps({
+        leagues: { allLeagues: { a: {}, b: {} }, loading: false }
+      })
+    ).toEqual({ allLeagues: { a: {}, b: {} }, loading: false });
+  });
+});
+
+describe("Reducer handles actions", () => {
   it("has initial state, and returns it by default", () => {
     expect(leagues(undefined, { type: "invalid" })).toEqual({
-      allLeagues: [],
+      allLeagues: {},
       loading: false,
       error: false
     });
@@ -11,20 +26,33 @@ describe("it handles actions", () => {
 
   it("handles fetching", () => {
     expect(leagues(undefined, onFetchLeagueData)).toEqual({
-      allLeagues: [],
+      allLeagues: {},
       loading: true,
       error: false
     });
   });
 
   it("handles success", () => {
-    const seed = [{ leagues: {} }];
+    const seed = { league: {} };
     expect(
-      leagues({ allLeagues: [], loading: true }, onSuccessLeagueData(seed))
+      leagues(
+        { allLeagues: { league: {} }, loading: true },
+        onSuccessLeagueData(seed)
+      )
     ).toEqual({
       allLeagues: seed,
       loading: false,
       error: false
+    });
+  });
+  it("handles error", () => {
+    const seed = { league: {} };
+    expect(
+      leagues({ allLeagues: { league: {} }, loading: true }, onErroLeagueData)
+    ).toEqual({
+      allLeagues: seed,
+      loading: false,
+      error: true
     });
   });
 });

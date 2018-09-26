@@ -30,7 +30,8 @@
       "!src/registerServiceWorker.js",
       "!src/ducks/index.js",
       "!src/setupTests.js",
-      "!src/index.js"
+      "!src/index.js",
+      "src/**/*.mock.*.js"
     ],
     "coverageReporters": [
       "text",

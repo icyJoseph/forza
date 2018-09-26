@@ -3,8 +3,8 @@ export const playerGoalsAccumulator = (goals, { goalsLastSeason }) =>
   goals + goalsLastSeason;
 
 // keeping this just to show evolution of reasoning
-export const teamGoalsAcculmulator = (goals, { teamGoalsLastSeason }) =>
-  goals + teamGoalsLastSeason;
+// export const teamGoalsAcculmulator = (goals, { teamGoalsLastSeason }) =>
+//   goals + teamGoalsLastSeason;
 
 export const goalsAcculmulator = (
   goals,

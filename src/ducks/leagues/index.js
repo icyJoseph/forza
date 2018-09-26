@@ -1,14 +1,11 @@
 import axios from "axios";
 import { efficientReformat } from "./helpers";
-
-// constants -> change to process env later on
-// const url = "http://localhost:1337/large";
-const url = "http://localhost:1337/";
+import { url } from "../../contants";
 
 // action types
-const FETCH_LEAGUES_DATA = "leagues fetch";
-const SUCCESS_LEAGUES_DATA = "leagues success";
-const ERROR_LEAGUES_DATA = "leagues error";
+export const FETCH_LEAGUES_DATA = "leagues fetch";
+export const SUCCESS_LEAGUES_DATA = "leagues success";
+export const ERROR_LEAGUES_DATA = "leagues error";
 
 // actions
 export const onFetchLeagueData = {
@@ -63,7 +60,7 @@ function leagues(state = initialState, action) {
       const { allLeagues } = action;
       return { ...state, allLeagues, loading: false, error: false };
     case ERROR_LEAGUES_DATA:
-      return { ...state, error: true };
+      return { ...state, error: true, loading: false };
     default:
       return state;
   }
