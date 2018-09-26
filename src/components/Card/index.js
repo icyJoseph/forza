@@ -18,7 +18,7 @@ const commonCard = css`
   -ms-user-select: none;
 `;
 
-const CardWrap = styled(Paper).attrs({
+export const CardWrap = styled(Paper).attrs({
   style: ({ height }) => ({
     height: height ? `${height}px` : "auto"
   })
