@@ -33,7 +33,7 @@ export const SECONDARY = "secondary";
 
 // endpoints
 // change to process env later on
-export const url = "http://localhost:1337/";
+export const url = "http://192.168.0.4:1337/";
 
 // breakpoints
 export const portalBreakPoint = "(min-width: 699px)";
