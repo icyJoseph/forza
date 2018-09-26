@@ -5,7 +5,7 @@ import { TeamsButtonPad } from "../../components/TeamsButtonPad";
 import { PlayersButtonPad } from "../../components/PlayersButtonPad";
 import { setPrediction, setTopScorer } from "../../ducks/predictions";
 
-const Prediction = ({
+export const Prediction = ({
   player,
   hook,
   setTopScorer,

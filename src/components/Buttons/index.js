@@ -15,7 +15,7 @@ export const StyledAnswerButton = styled(Button).attrs({
 `;
 
 export const AnswerButton = ({ content, ...props }) => (
-  <StyledAnswerButton variant="fab" mini {...props}>
+  <StyledAnswerButton variant="fab" mini aria-label={content} {...props}>
     <Typography color="secondary">{content}</Typography>
   </StyledAnswerButton>
 );
@@ -28,7 +28,6 @@ export const MobileAnswerButton = ({ content, ...props }) => (
   <StyledMobileAnswerButton
     variant="fab"
     color="primary"
-    id={content}
     aria-label={content}
     {...props}
   >

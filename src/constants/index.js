@@ -32,3 +32,5 @@ export const url = "http://localhost:1337/";
 
 // breakpoints
 export const portalBreakPoint = "(min-width: 699px)";
+export const podiumBreakpoint = "(min-width: 785px)";
+export const topMenuBreakPoint = "(min-width: 600px)";

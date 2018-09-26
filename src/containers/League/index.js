@@ -12,9 +12,7 @@ import List from "../../components/List";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
 import { buildPlayersTree, goHome, setUpMediaQuery } from "../../helpers";
-
-const breakpoint = "(min-width: 785px)";
-const topMenuBreakPoint = "(min-width: 600px)";
+import { podiumBreakpoint, topMenuBreakPoint } from "../../constants";
 
 export const PredictionContainer = styled.div`
   position: sticky;
@@ -94,7 +92,8 @@ export class League extends Component {
   };
 
   render() {
-    const { league } = this.state;
+    const { sorting } = this.props;
+    const { league, value, open, id, top } = this.state;
     if (!league) {
       return <div>Just one sec...</div>;
     }
@@ -106,12 +105,11 @@ export class League extends Component {
       (acc, player) => acc.concat(playersTree[player]),
       []
     );
-    const { value, open, id, top } = this.state;
-    const { sorting } = this.props;
+
     return (
       <Fragment>
         <PredictionContainer top={top}>
-          <Podium query={breakpoint} leagueName={leagueName} />
+          <Podium query={podiumBreakpoint} leagueName={leagueName} />
         </PredictionContainer>
         {value === "teams" && (
           <CardContainer id="teams">
@@ -152,12 +150,12 @@ export class League extends Component {
           <BottomNavigationAction
             id="bottomTeams"
             value="teams"
-            label="Teams"
+            label="teams"
           />
           <BottomNavigationAction
             id="bottomPlayers"
             value="players"
-            label="Players"
+            label="players"
           />
         </StyledBottomNavigation>
       </Fragment>
