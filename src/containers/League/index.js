@@ -11,7 +11,7 @@ import { CardContainer } from "../../components/Card";
 import List from "../../components/List";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
-import { buildPlayersTree, goHome } from "../../helpers";
+import { buildPlayersTree, goHome, setUpMediaQuery } from "../../helpers";
 
 const breakpoint = "(min-width: 785px)";
 const topMenuBreakPoint = "(min-width: 600px)";
@@ -35,33 +35,26 @@ export const StyledBottomNavigation = styled(BottomNavigation)`
 
 export class League extends Component {
   state = {
-    value: 0,
+    value: "teams",
     open: false,
     id: null,
     top: "56px",
     league: undefined
   };
 
-  root = null;
-
   componentDidMount() {
-    this.root = document.getElementById("root");
     // take user to the top
     window.scrollTo(0, 0);
+
     const league = this.props.allLeagues[this.props.match.params.league];
+
     if (!league) {
       this.props.fetch();
     } else {
       this.setState({ league });
     }
 
-    const targetWindow = this.props.targetWindow || window;
-    // get the matchMedia function
-    this.mediaQueryList = targetWindow.matchMedia(topMenuBreakPoint);
-    // listen to updates
-    this.mediaQueryList.addListener(this.updateMatches);
-    // are we matching?
-    return this.updateMatches();
+    return setUpMediaQuery.bind(this)(topMenuBreakPoint);
   }
 
   componentDidUpdate() {
@@ -83,26 +76,17 @@ export class League extends Component {
     const top = window.getComputedStyle(menu).height;
     return this.setState({ top });
   };
-  handleChange = (e, value) => this.setState({ value });
 
-  bubbleHandler = e => {
-    const source =
-      e &&
-      e.path &&
-      e.path.find(elem => elem.id === this.state.id || elem.id === "@pinned");
-    return !source && e.path ? this.closePredictionMaker() : null;
-  };
+  handleChange = (e, value) => this.setState({ value, open: false, id: null });
 
-  openPredictionMaker = id => {
-    this.root.addEventListener("click", this.bubbleHandler);
-    return this.setState({
-      open: true,
-      id
-    });
+  togglePredictionMaker = id => {
+    return this.setState(prevState => ({
+      open: prevState.id === id ? !prevState.open : true,
+      id: prevState.id === id ? null : id
+    }));
   };
 
   closePredictionMaker = () => {
-    this.root.removeEventListener("click", this.bubbleHandler);
     return this.setState({
       open: false,
       id: null
@@ -129,23 +113,23 @@ export class League extends Component {
         <PredictionContainer top={top}>
           <Podium query={breakpoint} leagueName={leagueName} />
         </PredictionContainer>
-        {value === 0 && (
-          <CardContainer>
+        {value === "teams" && (
+          <CardContainer id="teams">
             <List
               items={teams}
               type="teams"
-              callback={this.openPredictionMaker}
+              callback={this.togglePredictionMaker}
               current={id}
               sorting={sorting}
             />
           </CardContainer>
         )}
-        {value === 1 && (
-          <CardContainer>
+        {value === "players" && (
+          <CardContainer id="players">
             <List
               items={players}
               type="players"
-              callback={this.openPredictionMaker}
+              callback={this.togglePredictionMaker}
               current={id}
               sorting={sorting}
             />
@@ -165,8 +149,16 @@ export class League extends Component {
           value={value}
           onChange={this.handleChange}
         >
-          <BottomNavigationAction label="Teams" />
-          <BottomNavigationAction label="Players" />
+          <BottomNavigationAction
+            id="bottomTeams"
+            value="teams"
+            label="Teams"
+          />
+          <BottomNavigationAction
+            id="bottomPlayers"
+            value="players"
+            label="Players"
+          />
         </StyledBottomNavigation>
       </Fragment>
     );

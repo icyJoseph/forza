@@ -38,6 +38,7 @@ const MobileAnswerButton = ({ content, ...props }) => (
   <StyledMobileAnswerButton
     variant="fab"
     color="primary"
+    id={content}
     aria-label={content}
     {...props}
   >
@@ -45,24 +46,24 @@ const MobileAnswerButton = ({ content, ...props }) => (
   </StyledMobileAnswerButton>
 );
 
-const SideLabel = ({ matches, content }) =>
-  !matches && (
-    <Paper
-      elevation={10}
-      style={{
-        position: "fixed",
-        left: "50%",
-        transform: "translate(-50%, 0)",
-        minWidth: "100px",
-        padding: "10px",
-        bottom: "70px",
-        background: "dodgerblue",
-        color: "white"
-      }}
-    >
-      {content}
-    </Paper>
-  );
+const SideLabel = ({ content, handler }) => (
+  <Paper
+    elevation={10}
+    style={{
+      position: "fixed",
+      left: "50%",
+      transform: "translate(-50%, 0)",
+      minWidth: "100px",
+      padding: "10px",
+      bottom: "70px",
+      background: "dodgerblue",
+      color: "white"
+    }}
+    onClick={handler}
+  >
+    {content}
+  </Paper>
+);
 
 const places = [1, 2, 3];
 const TeamsButtonPad = ({ leagueName, team, matches, ...props }) => {
@@ -84,7 +85,11 @@ const TeamsButtonPad = ({ leagueName, team, matches, ...props }) => {
   return (
     <Fragment>
       {Buttons}
-      <SideLabel matches={matches} content={team.teamName} />
+      <SideLabel
+        matches={matches}
+        content={team.teamName}
+        handler={props.close}
+      />
     </Fragment>
   );
 };
@@ -113,7 +118,11 @@ const PlayersButtonPad = ({ matches, ...props }) => {
   return (
     <Fragment>
       {Buttons}
-      <SideLabel matches={matches} content={props.player.playerName} />
+      <SideLabel
+        matches={matches}
+        content={props.player.playerName}
+        handler={props.close}
+      />
     </Fragment>
   );
 };

@@ -20,12 +20,12 @@ export const curry = f => (...a) => (...b) => f(...a, ...b);
 
 export const goHome = history => history.push("/");
 
-export const setUpMediaQuery = (ctx, callback, query) => {
-  const targetWindow = ctx.props.targetWindow || window;
+export function setUpMediaQuery(query) {
+  const targetWindow = this.props.targetWindow || window;
   // get the matchMedia function
-  ctx.mediaQueryList = targetWindow.matchMedia(query);
+  this.mediaQueryList = targetWindow.matchMedia(query);
   // listen to updates
-  ctx.mediaQueryList.addListener(callback);
+  this.mediaQueryList.addListener(this.updateMatches);
   // are we matching?
-  return callback();
-};
+  return this.updateMatches();
+}

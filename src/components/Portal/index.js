@@ -1,6 +1,8 @@
 import React, { Component as ReactComponent } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
+import { FLOATING_BOTTOM_MENU, portalBreakPoint } from "../../constants";
+import { setUpMediaQuery } from "../../helpers";
 
 const PortalWrap = styled.div`
   position: absolute;
@@ -11,25 +13,29 @@ const PortalWrap = styled.div`
   justify-content: space-evenly;
 `;
 
-const portalBreakPoint = "(min-width: 699px)";
+export const elementSelector = (matches, hook) =>
+  matches ? hook : FLOATING_BOTTOM_MENU;
 
-export default class Portal extends ReactComponent {
+export const wrap = (matches, Component, componentProps) =>
+  matches ? (
+    <PortalWrap>
+      <Component matches={matches} {...componentProps} />
+    </PortalWrap>
+  ) : (
+    <Component matches={matches} {...componentProps} />
+  );
+
+export class Portal extends ReactComponent {
   state = {
     matches: false
   };
+
   componentDidMount() {
-    const targetWindow = this.props.targetWindow || window;
-    // get the matchMedia function
-    this.mediaQueryList = targetWindow.matchMedia(portalBreakPoint);
-    // listen to updates
-    this.mediaQueryList.addListener(this.updateMatches);
-    // are we matching?
-    return this.updateMatches();
+    return setUpMediaQuery.bind(this)(portalBreakPoint);
   }
 
   updateMatches = () => {
     const { matches } = this.mediaQueryList;
-
     return this.setState({ matches });
   };
 
@@ -38,19 +44,16 @@ export default class Portal extends ReactComponent {
   }
 
   render() {
-    const { Component, hook, componentProps } = this.props;
     const { matches } = this.state;
-    const portalElem = matches ? hook : "@pinned";
+    const { Component, hook, componentProps } = this.props;
+
+    const portalElem = elementSelector(matches, hook);
     const elem = document.getElementById(portalElem);
 
-    const Portal = matches ? (
-      <PortalWrap>
-        <Component matches={matches} {...componentProps} />
-      </PortalWrap>
-    ) : (
-      <Component matches={matches} {...componentProps} />
-    );
+    const Portal = wrap(matches, Component, componentProps);
 
     return ReactDOM.createPortal(Portal, elem);
   }
 }
+
+export default Portal;
