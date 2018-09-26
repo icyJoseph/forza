@@ -18,6 +18,9 @@ export const buttonColor = {
 export const SORT_BY_GOALS = "Sort By Goals";
 export const PREDICTIONS = "Predictions!";
 export const GO_BACK = "Go Back";
+export const PLACES = [1, 2, 3];
+export const NO = "No";
+export const YES = "Yes";
 
 // style props
 export const PRIMARY = "primary";
