@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import Emoji from "../Emoji";
 
 export const StyledAnswerButton = styled(Button).attrs({
   style: ({ middle, background }) => ({
     marginTop: middle !== 2 ? "-20px" : "0px",
-    background: background ? background : "dodgerblue"
+    background: "dodgerblue"
   })
 })`
   bottom: 20px;
@@ -16,7 +16,7 @@ export const StyledAnswerButton = styled(Button).attrs({
 
 export const AnswerButton = ({ content, ...props }) => (
   <StyledAnswerButton variant="fab" mini aria-label={content} {...props}>
-    <Typography color="secondary">{content}</Typography>
+    <Emoji place={content} />
   </StyledAnswerButton>
 );
 
@@ -31,6 +31,6 @@ export const MobileAnswerButton = ({ content, ...props }) => (
     aria-label={content}
     {...props}
   >
-    <Typography color="secondary">{content}</Typography>
+    <Emoji place={content} />
   </StyledMobileAnswerButton>
 );

@@ -6,6 +6,7 @@ import { PlayersButtonPad } from "../../components/PlayersButtonPad";
 import { setPrediction, setTopScorer } from "../../ducks/predictions";
 
 export const Prediction = ({
+  open,
   player,
   hook,
   setTopScorer,
@@ -28,7 +29,13 @@ export const Prediction = ({
         team
       };
   return (
-    <Portal hook={hook} Component={Component} componentProps={componentProps} />
+    open && (
+      <Portal
+        hook={hook}
+        Component={Component}
+        componentProps={componentProps}
+      />
+    )
   );
 };
 

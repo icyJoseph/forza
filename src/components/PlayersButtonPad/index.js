@@ -10,15 +10,14 @@ export const AnswerTopScorer = ({ setTopScorer, player, answer, close }) => {
 };
 
 export const PlayersButtonPad = ({ matches, ...props }) => {
-  const Pads = [{ answer: NO }, { answer: YES, background: "green" }];
+  const Pads = [NO, YES];
   const toUse = matches ? Pads.slice(0).reverse() : Pads;
-  const Buttons = toUse.map(({ answer, background }) => {
+  const Buttons = toUse.map(answer => {
     const Component = matches ? AnswerButton : MobileAnswerButton;
     return (
       <Component
         key={answer}
         content={answer}
-        background={background}
         onClick={curry(AnswerTopScorer)({ answer, ...props })}
       />
     );

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Card from "../Card";
 import { curry } from "../../helpers";
+import { TEAMS, PLAYERS } from "../../constants";
 
 const Flag = styled.div.attrs({
   style: ({ color }) => ({
@@ -63,7 +64,7 @@ export const Player = ({
 );
 
 const goalCriteria = type => {
-  const key = type === "players" ? "goalsLastSeason" : "teamGoalsLastSeason";
+  const key = type === PLAYERS ? "goalsLastSeason" : "teamGoalsLastSeason";
   return (a, b) => b[key] - a[key];
 };
 
@@ -75,12 +76,12 @@ const sortList = (items, sorting, type) => {
 export const ListContainer = ({
   items,
   callback,
-  type = "team",
+  type = TEAMS,
   current,
   sorting
 }) =>
   sortList(items, sorting, type).map((item, index) => {
-    const Component = type === "players" ? Player : Team;
+    const Component = type === PLAYERS ? Player : Team;
     return (
       <Component
         key={`${type}-${index}`}

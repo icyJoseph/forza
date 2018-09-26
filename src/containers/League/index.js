@@ -12,7 +12,13 @@ import List from "../../components/List";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 
 import { buildPlayersTree, goHome, setUpMediaQuery } from "../../helpers";
-import { podiumBreakpoint, topMenuBreakPoint } from "../../constants";
+import {
+  podiumBreakpoint,
+  topMenuBreakPoint,
+  TEAMS,
+  PLAYERS,
+  TOPMENU
+} from "../../constants";
 
 export const PredictionContainer = styled.div`
   position: sticky;
@@ -33,7 +39,7 @@ export const StyledBottomNavigation = styled(BottomNavigation)`
 
 export class League extends Component {
   state = {
-    value: "teams",
+    value: TEAMS,
     open: false,
     id: null,
     top: "56px",
@@ -43,17 +49,13 @@ export class League extends Component {
   componentDidMount() {
     // take user to the top
     window.scrollTo(0, 0);
-
     const league = this.props.allLeagues[this.props.match.params.league];
-
-    if (!league) {
-      this.props.fetch();
-    } else {
-      this.setState({ league });
-    }
-
+    this.shouldFetchOrSet(league);
     return setUpMediaQuery.bind(this)(topMenuBreakPoint);
   }
+
+  shouldFetchOrSet = league =>
+    !league ? this.props.fetch() : this.setState({ league });
 
   componentDidUpdate() {
     const league = this.props.allLeagues[this.props.match.params.league];
@@ -70,7 +72,7 @@ export class League extends Component {
   }
 
   updateMatches = () => {
-    const menu = document.getElementById("TopMenu");
+    const menu = document.getElementById(TOPMENU);
     const top = window.getComputedStyle(menu).height;
     return this.setState({ top });
   };
@@ -106,57 +108,38 @@ export class League extends Component {
       []
     );
 
+    const listProps = { items: value === TEAMS ? teams : players };
+
     return (
       <Fragment>
         <PredictionContainer top={top}>
           <Podium query={podiumBreakpoint} leagueName={leagueName} />
         </PredictionContainer>
-        {value === "teams" && (
-          <CardContainer id="teams">
-            <List
-              items={teams}
-              type="teams"
-              callback={this.togglePredictionMaker}
-              current={id}
-              sorting={sorting}
-            />
-          </CardContainer>
-        )}
-        {value === "players" && (
-          <CardContainer id="players">
-            <List
-              items={players}
-              type="players"
-              callback={this.togglePredictionMaker}
-              current={id}
-              sorting={sorting}
-            />
-          </CardContainer>
-        )}
-        {open && (
-          <Prediction
-            player={playersTree[id]}
-            leagueName={league.leagueName}
-            team={league.teams.find(team => team.teamName === id)}
-            close={this.closePredictionMaker}
-            hook={id}
+        <CardContainer>
+          <List
+            {...listProps}
+            type={value}
+            callback={this.togglePredictionMaker}
+            current={id}
+            sorting={sorting}
           />
-        )}
+        </CardContainer>
+        <Prediction
+          open={open}
+          hook={id}
+          player={playersTree[id]}
+          leagueName={league.leagueName}
+          team={league.teams.find(team => team.teamName === id)}
+          close={this.closePredictionMaker}
+        />
         <StyledBottomNavigation
           showLabels
           value={value}
           onChange={this.handleChange}
         >
-          <BottomNavigationAction
-            id="bottomTeams"
-            value="teams"
-            label="teams"
-          />
-          <BottomNavigationAction
-            id="bottomPlayers"
-            value="players"
-            label="players"
-          />
+          {[TEAMS, PLAYERS].map(item => (
+            <BottomNavigationAction key={item} value={item} label={item} />
+          ))}
         </StyledBottomNavigation>
       </Fragment>
     );

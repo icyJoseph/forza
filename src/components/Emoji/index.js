@@ -10,6 +10,10 @@ const labelSymbolSelector = place => {
       return { symbol: "🥉", label: "3rd" };
     case "ball":
       return { symbol: "⚽️", label: "Best" };
+    case "Yes":
+      return { symbol: "✔️", label: "Yes" };
+    case "No":
+      return { symbol: "❌", label: "No" };
     default:
       return { symbol: "", label: "" };
   }
