@@ -2,65 +2,37 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import Emoji from "../../components/Emoji";
-import { Place, PodiumWrapper, Name, Position } from "./styled";
+import {
+  Stand,
+  PodiumWrapper,
+  PlaceHolder,
+  TopScorer,
+  PredictionsForLeague
+} from "./styled";
 
 import podiumSorter from "./utils";
-
-const Stand = ({ place, teamName, open }) => {
-  return (
-    <div>
-      <Position>
-        <Emoji place={place} />
-      </Position>
-      <Place place={place} elevation={3} open={open}>
-        <Name>{teamName}</Name>
-      </Place>
-    </div>
-  );
-};
-
-const PlaceHolder = ({ open, leagueName }) => (
-  <div
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      height: "150px",
-      justifyContent: "center",
-      alignItems: "center"
-    }}
-  >
-    <div style={{ margin: "0 auto" }}>{`How will the ${leagueName} end?`}</div>
-    <div style={{ margin: "0 auto" }}>
-      Click on the teams. {!open && "Click here to expand."}
-    </div>
-  </div>
-);
+import { setUpMediaQuery } from "../../helpers";
 
 export class Podium extends Component {
   state = { matches: true, open: false };
 
   componentDidMount() {
     const { query } = this.props;
-    // to be able to test
-    const targetWindow = this.props.targetWindow || window;
-    // get the matchMedia function
-    this.mediaQueryList = targetWindow.matchMedia(query);
-    // listen to updates
-    this.mediaQueryList.addListener(this.updateMatches);
-    // are we matching?
-    const { matches } = this.mediaQueryList;
-    this.setState({ open: matches });
-    return this.updateMatches();
+    setUpMediaQuery.bind(this)(query);
+    return this.setMatchesToOpen();
   }
 
   componentWillUnmount() {
     this.mediaQueryList.removeListener(this.updateMatches);
   }
 
+  setMatchesToOpen = () => {
+    const { matches } = this.mediaQueryList;
+    return this.setState({ open: matches });
+  };
+
   updateMatches = () => {
     const { matches } = this.mediaQueryList;
-
     return this.setState({ matches });
   };
 
@@ -77,33 +49,13 @@ export class Podium extends Component {
 
     return (
       <PodiumWrapper elevation={10} open={open} onClick={this.togglePodium}>
-        <div style={{ margin: "5px auto 0", height: "30px" }}>
-          {topScorerForLeague ? (
-            <div>
-              <span style={{ color: "dodgerblue" }}>{`${
-                topScorerForLeague.playerName
-              }`}</span>
-              {" as top scorer! "}
-              <Emoji place="ball" />
-            </div>
-          ) : (
-            "Who'll be top scorer?"
-          )}
-        </div>
-
+        <TopScorer topScorerForLeague={topScorerForLeague} />
         {predictionsForLeague ? (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "flex-end",
-              justifyContent: "center"
-            }}
-          >
+          <PredictionsForLeague>
             {podiumSorter(matches, predictionsForLeague).map(team => (
               <Stand key={team.teamName} {...team} open={open} />
             ))}
-          </div>
+          </PredictionsForLeague>
         ) : (
           <PlaceHolder open={open} leagueName={leagueName} />
         )}
