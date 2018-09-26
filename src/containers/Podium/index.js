@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import Emoji from "../../components/Emoji";
 import { Place, PodiumWrapper, Name, Position } from "./styled";
 
 import podiumSorter from "./utils";
@@ -9,7 +10,9 @@ import podiumSorter from "./utils";
 const Stand = ({ place, teamName, open }) => {
   return (
     <div>
-      <Position>{place}</Position>
+      <Position>
+        <Emoji place={place} />
+      </Position>
       <Place place={place} elevation={3} open={open}>
         <Name>{teamName}</Name>
       </Place>
@@ -17,7 +20,7 @@ const Stand = ({ place, teamName, open }) => {
   );
 };
 
-const PlaceHolder = ({ open }) => (
+const PlaceHolder = ({ open, leagueName }) => (
   <div
     style={{
       display: "flex",
@@ -27,7 +30,7 @@ const PlaceHolder = ({ open }) => (
       alignItems: "center"
     }}
   >
-    <div style={{ margin: "0 auto" }}>How will the league end?</div>
+    <div style={{ margin: "0 auto" }}>{`How will the ${leagueName} end?`}</div>
     <div style={{ margin: "0 auto" }}>
       Click on the teams. {!open && "Click here to expand."}
     </div>
@@ -75,9 +78,17 @@ export class Podium extends Component {
     return (
       <PodiumWrapper elevation={10} open={open} onClick={this.togglePodium}>
         <div style={{ margin: "5px auto 0", height: "30px" }}>
-          {topScorerForLeague
-            ? `${topScorerForLeague.playerName} as top scorer!`
-            : "Who'll be top scorer?"}
+          {topScorerForLeague ? (
+            <div>
+              <span style={{ color: "dodgerblue" }}>{`${
+                topScorerForLeague.playerName
+              }`}</span>
+              {" as top scorer! "}
+              <Emoji place="ball" />
+            </div>
+          ) : (
+            "Who'll be top scorer?"
+          )}
         </div>
 
         {predictionsForLeague ? (
@@ -94,7 +105,7 @@ export class Podium extends Component {
             ))}
           </div>
         ) : (
-          <PlaceHolder open={open} />
+          <PlaceHolder open={open} leagueName={leagueName} />
         )}
       </PodiumWrapper>
     );

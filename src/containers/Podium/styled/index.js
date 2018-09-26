@@ -44,7 +44,7 @@ export const Place = styled(Paper).attrs({
 
 export const PodiumWrapper = styled(Paper).attrs({
   style: ({ open }) => ({
-    height: open ? "180px" : "110px"
+    height: open ? "200px" : "115px"
   })
 })`
   transition: height 0.5s ease;
