@@ -31,6 +31,7 @@
       "!src/ducks/index.js",
       "!src/setupTests.js",
       "!src/index.js",
+      "!src/components/Common/index.js",
       "src/**/*.mock.*.js"
     ],
     "coverageReporters": [
