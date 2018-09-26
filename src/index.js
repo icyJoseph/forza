@@ -8,7 +8,7 @@ import Routes from "./routes";
 import saveToStore from "./middleware";
 import rootReducer from "./ducks";
 
-import { STATE_NAME, white, dodgerBlue } from "./contants";
+import { STATE_NAME, white, dodgerBlue } from "./constants";
 import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
 

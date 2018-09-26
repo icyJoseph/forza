@@ -1,4 +1,4 @@
-import { STATE_NAME } from "../contants";
+import { STATE_NAME } from "../constants";
 
 export function saveState(state) {
   localStorage.setItem(STATE_NAME, JSON.stringify(state));

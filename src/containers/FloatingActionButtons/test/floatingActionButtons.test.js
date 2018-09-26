@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import { FloatingActionButtons, sortingColor } from "../";
-import { buttonColor, PRIMARY, SECONDARY } from "../../../contants";
+import { buttonColor, PRIMARY, SECONDARY } from "../../../constants";
 
 describe("FloatingActionButtons", () => {
   const props = {

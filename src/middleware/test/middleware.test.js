@@ -2,7 +2,7 @@ import { createStore } from "redux";
 import saveStore, { saveState, getStateAndSave } from "../";
 import rootReducer from "../../ducks/";
 import { TOGGLE_SORTING } from "../../ducks/sorting";
-import { STATE_NAME } from "../../contants";
+import { STATE_NAME } from "../../constants";
 
 const TEST = "test";
 

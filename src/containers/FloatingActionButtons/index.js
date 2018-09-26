@@ -15,7 +15,7 @@ import {
   PRIMARY,
   SECONDARY,
   GO_BACK
-} from "../../contants";
+} from "../../constants";
 
 import logo from "../../logo.png";
 

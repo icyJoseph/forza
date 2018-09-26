@@ -19,3 +19,13 @@ export const buildPlayersTree = (teams, leagueName) =>
 export const curry = f => (...a) => (...b) => f(...a, ...b);
 
 export const goHome = history => history.push("/");
+
+export const setUpMediaQuery = (ctx, callback, query) => {
+  const targetWindow = ctx.props.targetWindow || window;
+  // get the matchMedia function
+  ctx.mediaQueryList = targetWindow.matchMedia(query);
+  // listen to updates
+  ctx.mediaQueryList.addListener(callback);
+  // are we matching?
+  return callback();
+};

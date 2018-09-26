@@ -1,6 +1,6 @@
 import axios from "axios";
 import { efficientReformat } from "./helpers";
-import { url } from "../../contants";
+import { url } from "../../constants";
 
 // action types
 export const FETCH_LEAGUES_DATA = "leagues fetch";
