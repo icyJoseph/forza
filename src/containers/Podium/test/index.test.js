@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import { Podium } from "../";
-import { Name } from "../styled";
+import { Name } from "../../../components/Common";
 
 const predictions = {
   SomeLeague: {

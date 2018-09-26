@@ -73,8 +73,8 @@ export class League extends Component {
 
   updateMatches = () => {
     const menu = document.getElementById(TOPMENU);
-    const top = window.getComputedStyle(menu).height;
-    return this.setState({ top });
+    const top = menu && window.getComputedStyle(menu).height;
+    return top && this.setState({ top });
   };
 
   handleChange = (e, value) => this.setState({ value, open: false, id: null });
