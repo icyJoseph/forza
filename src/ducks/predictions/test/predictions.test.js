@@ -1,4 +1,9 @@
-import predictions, { setPrediction, setTopScorer } from "../";
+import predictions, {
+  setPrediction,
+  setTopScorer,
+  resetAll,
+  replaceTeams
+} from "../";
 
 describe("it handles user predictions", () => {
   it("takes a teams place prediction", () => {
@@ -14,6 +19,7 @@ describe("it handles user predictions", () => {
       topScorer: {}
     });
   });
+
   it("updates a teams place prediction", () => {
     expect(
       predictions(
@@ -43,5 +49,36 @@ describe("it handles user predictions", () => {
       predictions: {},
       topScorer: { La: { playerName: "JS", leagueName: "La" } }
     });
+  });
+
+  it("resets predictions", () => {
+    expect(
+      predictions(
+        {
+          predictions: {
+            Ab: { 1: { teamName: "A", place: 1, leagueName: "La", teamId: 1 } },
+            La: { 1: { teamName: "A", place: 1, leagueName: "La", teamId: 1 } }
+          },
+          topScorer: { La: { playerName: "John" } }
+        },
+        resetAll("La")
+      )
+    ).toEqual({
+      predictions: {
+        Ab: { 1: { teamName: "A", place: 1, leagueName: "La", teamId: 1 } }
+      },
+      topScorer: {}
+    });
+  });
+});
+
+describe("replaceTeams", () => {
+  it("adds a new team", () => {
+    const teamId = 1;
+    const current = { 1: { teamId: 2 } };
+    const accumulator = replaceTeams(teamId, current);
+    const acc = { 1: { teamId: 2 } };
+    const val = 1;
+    expect(accumulator(acc, val)).toEqual({ "1": { teamId: 2 } });
   });
 });

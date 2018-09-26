@@ -25,7 +25,7 @@ const initialState = {
 };
 
 // helpers
-const replaceTeams = (teamId, current) => (acc, val) =>
+export const replaceTeams = (teamId, current) => (acc, val) =>
   teamId === current[val].teamId ? { ...acc } : { ...acc, [val]: current[val] };
 
 const getPayload = ({ payload }) => (payload ? payload : { leagueName: null });
