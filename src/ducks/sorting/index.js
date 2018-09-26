@@ -1,5 +1,5 @@
 // action types
-const TOGGLE_SORTING = "ui sort by goals";
+export const TOGGLE_SORTING = "ui sort by goals";
 
 // actions
 export const toggleSort = () => ({
