@@ -1,33 +1,37 @@
 import React from "react";
-import styled from "styled-components";
+import { compose } from "redux";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import NavigateBefore from "@material-ui/icons/NavigateBefore";
+import { Pinned } from "../../components/Pinned";
 import { mapSortingToProps, toggleSort } from "../../ducks/sorting";
 import { curry, goHome } from "../../helpers";
+import {
+  buttonColor,
+  FLOATING_BOTTOM_MENU,
+  SORT_BY_GOALS,
+  PREDICTIONS,
+  PRIMARY,
+  SECONDARY,
+  GO_BACK
+} from "../../contants";
 
 import logo from "../../logo.png";
-const buttonColor = {
-  button: { color: "white", marginTop: "5px" }
-};
 
-const Pinned = styled.div`
-  position: fixed;
-  text-align: center;
-  bottom: 70px;
-  right: 15px;
-  display: flex;
-  z-index: 30;
-  flex-direction: column-reverse;
-`;
+export const sortingColor = sorting => (sorting ? PRIMARY : SECONDARY);
 
-export const BackButton = ({ toggle, sorting, classes, history }) => (
-  <Pinned id="@pinned">
+export const FloatingActionButtons = ({
+  toggle,
+  sorting,
+  classes,
+  history
+}) => (
+  <Pinned id={FLOATING_BOTTOM_MENU}>
     <Button
       variant="fab"
-      color="primary"
-      aria-label="Go Back"
+      color={PRIMARY}
+      aria-label={GO_BACK}
       className={classes.button}
       onClick={curry(goHome)(history)}
     >
@@ -35,19 +39,25 @@ export const BackButton = ({ toggle, sorting, classes, history }) => (
     </Button>
     <Button
       variant="fab"
-      color={sorting ? "primary" : "secondary"}
+      color={sortingColor(sorting)}
       className={classes.button}
-      aria-label="Sort By Goals"
+      aria-label={SORT_BY_GOALS}
       onClick={toggle}
     >
-      <img src={logo} alt="Predictions!" width="30px" />
+      <img src={logo} alt={PREDICTIONS} width="30px" />
     </Button>
   </Pinned>
 );
 
 const mapToggleToProps = { toggle: toggleSort };
-
-export default connect(
+const withConnect = connect(
   mapSortingToProps,
   mapToggleToProps
-)(withStyles(buttonColor)(BackButton));
+);
+
+const withButtonColor = withStyles(buttonColor);
+
+export default compose(
+  withConnect,
+  withButtonColor
+)(FloatingActionButtons);

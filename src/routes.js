@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import TopMenu from "./containers/TopMenu";
 import League from "./containers/League";
 import Landing from "./containers/Landing";
-import BackButton from "./containers/BackButton";
+import FloatingActionButtons from "./containers/FloatingActionButtons";
 
 const Router = () => (
   <BrowserRouter>
@@ -14,7 +14,7 @@ const Router = () => (
         <Route exact path="/:league" component={League} />
         <Route path="/" component={Landing} />
       </Switch>
-      <Route path="/:league" component={BackButton} />
+      <Route path="/:league" component={FloatingActionButtons} />
     </Fragment>
   </BrowserRouter>
 );
