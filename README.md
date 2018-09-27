@@ -29,18 +29,24 @@ The proposed solution is a React-Redux application.
 
 ### React Tree
 
-The application layout is as follows:
+The application layout is as follows at a container level:
 
 ```jsx
 <Provider>
   <Routes>
+    <TopMenu />
     <Landing />
     <League />
-    <BottomMenu />
-    <Predictions />
+    <Podium />
+    <Prediction />
+    <FloatingActionButtons />
   </Routes>
 </Provider>
 ```
+
+#### TopMenu
+
+Stateless component which renders a Material UI AppBar and the share, clear buttons when the user navigates inside a league.
 
 ### Redux Store
 

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
@@ -7,7 +8,13 @@ import { resetAll } from "../../ducks/predictions";
 import { curry, goHome } from "../../helpers";
 import { TOPMENU, SHARE, CLEAR } from "../../constants";
 
-export const TopMenu = ({ match, allLeagues, history, classes, resetAll }) => {
+/**
+ *
+ * @description Stateless component which renders a
+ * Material UI AppBar and the share,
+ * clear buttons when the user navigates inside a league.
+ */
+export const TopMenu = ({ match, allLeagues, history, resetAll }) => {
   const { params } = match;
   const league = allLeagues[params.league];
 
@@ -40,3 +47,10 @@ export default connect(
   ({ leagues: { allLeagues } }) => ({ allLeagues }),
   { resetAll }
 )(TopMenu);
+
+TopMenu.propTypes = {
+  match: PropTypes.func,
+  allLeagues: PropTypes.object,
+  history: PropTypes.func,
+  resetAll: PropTypes.object
+};
