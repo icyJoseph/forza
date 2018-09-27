@@ -4,9 +4,9 @@ import styled from "styled-components";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import Podium from "../../containers/Podium";
 import Prediction from "../../containers/Prediction";
 
+import Podium from "../../components/Podium";
 import { CardContainer } from "../../components/Card";
 import List from "../../components/List";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
@@ -94,7 +94,7 @@ export class League extends Component {
   };
 
   render() {
-    const { sorting } = this.props;
+    const { sorting, predictions } = this.props;
     const { league, value, open, id, top } = this.state;
     if (!league) {
       return <div>Just one sec...</div>;
@@ -113,7 +113,11 @@ export class League extends Component {
     return (
       <Fragment>
         <PredictionContainer top={top}>
-          <Podium query={podiumBreakpoint} leagueName={leagueName} />
+          <Podium
+            query={podiumBreakpoint}
+            leagueName={leagueName}
+            {...predictions}
+          />
         </PredictionContainer>
         <CardContainer>
           <List
@@ -146,13 +150,14 @@ export class League extends Component {
   }
 }
 
-const combineMap = ({ sorting, ...rest }) => ({
-  ...mapAllLeaguesToProps(rest),
-  sorting
+const mapStateToProps = ({ predictions, sorting, ...rest }) => ({
+  sorting,
+  predictions,
+  ...mapAllLeaguesToProps(rest)
 });
 
 // Redux
 export default connect(
-  combineMap,
+  mapStateToProps,
   mapFetchAction
 )(League);

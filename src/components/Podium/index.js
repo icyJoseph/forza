@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Stand } from "../../components/Stand";
-import { PlaceHolder } from "../../components/PlaceHolder";
-import { TopScorer } from "../../components/TopScorer";
-import { PodiumWrapper, FlexCenterContainer } from "../../components/Common";
+import { Stand } from "../Stand";
+import { PlaceHolder } from "../PlaceHolder";
+import { TopScorer } from "../TopScorer";
+import { PodiumWrapper, FlexCenterContainer } from "../Common";
 
 import podiumSorter from "./utils";
 import { setUpMediaQuery } from "../../helpers";
@@ -76,7 +75,4 @@ Stand.propTypes = {
   team: PropTypes.string
 };
 
-export default connect(({ predictions: { predictions, topScorer } }) => ({
-  predictions,
-  topScorer
-}))(Podium);
+export default Podium;
