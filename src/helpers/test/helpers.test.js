@@ -1,4 +1,10 @@
-import { buildPlayersTree, curry, handleShare, shouldFetch } from "../";
+import {
+  buildPlayersTree,
+  curry,
+  handleShare,
+  shouldFetch,
+  setUpMediaQuery
+} from "../";
 import { homepage } from "../../constants";
 
 const leagueName = "test";
@@ -111,5 +117,16 @@ describe("shouldFetch", () => {
   });
   it("evaluates expiry < now", () => {
     expect(shouldFetch(veryLateDate)).toEqual(false);
+  });
+});
+
+describe("setUpMediaQuery", () => {
+  it("uses the window", () => {
+    const ctx = {
+      updateMatches: jest.fn(),
+      props: {}
+    };
+    setUpMediaQuery.bind(ctx)("some query");
+    expect(ctx.updateMatches).toHaveBeenCalled();
   });
 });

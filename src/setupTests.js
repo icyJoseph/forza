@@ -26,6 +26,7 @@ Object.defineProperty(window, "localStorage", {
   value: localStorageMock
 });
 
+// Mock Share
 const shareMock = (function() {
   return {
     share: function(data) {
@@ -34,7 +35,22 @@ const shareMock = (function() {
   };
 })();
 
-// Mock Share
 Object.defineProperty(window, "navigator", {
   value: shareMock
+});
+
+// Mock matchMedia
+const matchMediaMock = function() {
+  return {
+    matchMedia: function(query) {
+      return {
+        matches: query => !query
+      };
+    },
+    addListener: function() {}
+  };
+};
+
+Object.defineProperty(window, "matchMedia", {
+  value: matchMediaMock
 });
