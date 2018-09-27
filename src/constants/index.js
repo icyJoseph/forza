@@ -26,6 +26,8 @@ export const TEAMS = "Teams";
 export const PLAYERS = "Players";
 export const SHARE = "Share";
 export const CLEAR = "Clear";
+export const GOALS_LAST_SEASON = "goalsLastSeason";
+export const TEAM_GOALS_LAST_SEASON = "teamGoalsLastSeason";
 
 // style props
 export const PRIMARY = "primary";

@@ -1,23 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+import PropTypes from "prop-types";
 import Card from "../Card";
 import { curry } from "../../helpers";
 import { TEAMS, PLAYERS } from "../../constants";
-
-const Flag = styled.div.attrs({
-  style: ({ color }) => ({
-    backgroundColor: `${color}`,
-    border: color === "#FFFFFF" ? "1px dashed gray" : ""
-  })
-})`
-  width: 30px;
-  height: 5px;
-  margin: 3px auto;
-`;
+import { Flag } from "../Flag";
+import { shouldHighlight, sortList } from "./utils";
 
 // the threshold can later on be served by the user
-const shouldHighlight = (goals, threshold, index) =>
-  goals > threshold ? [index] : [];
 
 export const Team = ({
   teamName,
@@ -63,16 +52,6 @@ export const Player = ({
   </Card>
 );
 
-const goalCriteria = type => {
-  const key = type === PLAYERS ? "goalsLastSeason" : "teamGoalsLastSeason";
-  return (a, b) => b[key] - a[key];
-};
-
-const sortList = (items, sorting, type) => {
-  const copy = items.slice(0);
-  return sorting ? copy.sort(goalCriteria(type)) : items;
-};
-
 export const ListContainer = ({
   items,
   callback,
@@ -91,5 +70,13 @@ export const ListContainer = ({
       />
     );
   });
+
+ListContainer.propTypes = {
+  items: PropTypes.array,
+  callback: PropTypes.func,
+  type: PropTypes.string,
+  current: PropTypes.string,
+  sorting: PropTypes.bool
+};
 
 export default ListContainer;
