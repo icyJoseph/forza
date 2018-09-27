@@ -81,7 +81,7 @@ Why not run locally as developer?
 
 > It is better to go to the [Demo](#demo).
 
-To change this behavior, go to `src/constants/index.js` and change the url constant to:
+To change this behavior, go to `src/config.js` and change the url to:
 
 ```javascript
 export const url = process.env.REACT_APP_SECRET;
