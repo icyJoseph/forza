@@ -6,6 +6,7 @@ import Routes, {
   Landing,
   FloatingActionButtons
 } from "../routes";
+import { url } from "../config";
 
 describe("static copy of the routes", () => {
   it("matches snapshot", () => {
@@ -39,4 +40,8 @@ describe("FloatingActionButtons", () => {
   it("returns", () => {
     expect(loaded.exists()).toEqual(true);
   });
+});
+
+describe("builds the correct endpoint for development", () => {
+  expect(url).toEqual("http://localhost:1337/");
 });

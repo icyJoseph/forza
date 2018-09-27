@@ -7,7 +7,7 @@ import {
   SUCCESS_LEAGUES_DATA,
   ERROR_LEAGUES_DATA
 } from "../";
-import { url } from "../../../constants";
+import { url } from "../../../config";
 import mock from "./mock.data";
 import format from "./mock.format";
 

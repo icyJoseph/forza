@@ -1,6 +1,6 @@
 import axios from "axios";
 import { efficientReformat } from "./helpers";
-import { url } from "../../constants";
+import { url } from "../../config";
 import { addExpiry } from "../../helpers";
 
 // action types
