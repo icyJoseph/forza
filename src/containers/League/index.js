@@ -1,17 +1,26 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import Prediction from "../../containers/Prediction";
 
 import Podium from "../../components/Podium";
+import Loading from "../../components/Loading";
 import { CardContainer } from "../../components/Card";
 import List from "../../components/List";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
-import { buildPlayersTree, goHome, setUpMediaQuery } from "../../helpers";
+import {
+  curry,
+  buildPlayersTree,
+  goHome,
+  setUpMediaQuery
+} from "../../helpers";
 import {
   PredictionContainer,
   StyledBottomNavigation
 } from "../../components/Common";
+
+import { toggler } from "./utils";
 import {
   podiumBreakpoint,
   topMenuBreakPoint,
@@ -62,12 +71,7 @@ export class League extends Component {
 
   handleChange = (e, value) => this.setState({ value, open: false, id: null });
 
-  togglePredictionMaker = id => {
-    return this.setState(prevState => ({
-      open: prevState.id === id ? !prevState.open : true,
-      id: prevState.id === id ? null : id
-    }));
-  };
+  togglePredictionMaker = id => this.setState(curry(toggler)(id));
 
   closePredictionMaker = () => {
     return this.setState({
@@ -80,7 +84,7 @@ export class League extends Component {
     const { sorting, predictions } = this.props;
     const { league, value, open, id, top } = this.state;
     if (!league) {
-      return <div>Just one sec...</div>;
+      return <Loading />;
     }
 
     const { leagueName = "", teams = [] } = league;
@@ -133,7 +137,14 @@ export class League extends Component {
   }
 }
 
-const mapStateToProps = ({ predictions, sorting, ...rest }) => ({
+League.propTypes = {
+  fetch: PropTypes.func,
+  allLeagues: PropTypes.object,
+  sorting: PropTypes.bool,
+  predictions: PropTypes.object
+};
+
+export const mapStateToProps = ({ predictions, sorting, ...rest }) => ({
   sorting,
   predictions,
   ...mapAllLeaguesToProps(rest)
