@@ -47,7 +47,8 @@ const matchMediaMock = function() {
         matches: query => !query
       };
     },
-    addListener: function() {}
+    addListener: function() {},
+    removeListener: function() {}
   };
 };
 

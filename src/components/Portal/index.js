@@ -1,10 +1,11 @@
 import React, { Component as ReactComponent } from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { FLOATING_BOTTOM_MENU, portalBreakPoint } from "../../constants";
 import { setUpMediaQuery } from "../../helpers";
 
-const PortalWrap = styled.div`
+export const PortalWrap = styled.div`
   position: absolute;
   margin-top: 80px;
   width: 170px;
@@ -55,5 +56,11 @@ export class Portal extends ReactComponent {
     return ReactDOM.createPortal(Portal, elem);
   }
 }
+
+Portal.propTypes = {
+  Component: PropTypes.func,
+  hook: PropTypes.string,
+  componentProps: PropTypes.object
+};
 
 export default Portal;
