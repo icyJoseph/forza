@@ -32,26 +32,85 @@ The proposed solution is a React-Redux application.
 The application layout is as follows at a container level:
 
 ```jsx
-<Provider>
-  <Routes>
-    <TopMenu />
-    <Landing />
-    <League />
-    <Podium />
-    <Prediction />
-    <FloatingActionButtons />
-  </Routes>
-</Provider>
+const App = () => (
+  <Provider>
+    <Routes>
+      <TopMenu />
+      <Landing />
+      <League />
+      <Prediction />
+      <FloatingActionButtons />
+    </Routes>
+  </Provider>
+);
 ```
 
 #### TopMenu
 
 Stateless component which renders a Material UI AppBar and the share, clear buttons when the user navigates inside a league.
 
+When inside a league it also renders the name and country of the league as MainTitle.
+
+#### Landing
+
+Fetches leagues data and renders a card for each one of them.
+
+#### League
+
+Shows the user's predictions for a league. It also renders a card for each team or player in the league.
+
+#### Prediction
+
+A set of buttons that will attach to the card selected by the user. This is a singleton. In mobile view they attack to the Floating Action Buttons. It also includes label in the middle of the screen which indicates the current selection.
+
+#### FloatingActionsButtons
+
+Normally two buttons. Back and sort by goals.
+
+In mobile view the Prediction container attaches to the Floating Action Buttons.
+
 ### Redux Store
+
+Simple redux store with keys for predictions, all leagues and sorting status.
+
+#### Middleware
+
+1. The store uses two middlewares. One is to show Redux store activity in Chrome dev tools.
+
+2. The other middleware copies the store to the local storage at every new action, with the updated state.
+
+> This last middleware allows the user the refresh, the page and come back right where they left.
+
+#### Store Structure
+
+1. Predictions is an object where we store each league name and predictions as values.
+
+2. All leagues is an object storing all leagueName as keys, and league data as values.
+
+3. Sorting simply checks if the user has clicked the sorting button.
+
+> This could have been a local state, but since we are caching the store state at every new action, we can in fact, also save the user sorting criteria.
 
 ### User Interaction
 
-### Asumptions
+Upon landing the leagues are fetched. The user can select one, which will navigate to `/leagueId`.
 
-### Purpose
+- There the user can click on the team cards or navigate to the players tab, where the cards are also clickable.
+
+> For mobile view the buttons are either pinned to the bottom right, while for desktop these float on top of the card.
+
+- The user selections are reflected on the top panel
+
+> The user may clear all selections by clicking clear on the Top Menu.
+
+- The user can sort by goals scored last season, clicking the ball icon.
+
+- The user can go back to the league with the pinned back button at the bottom right.
+
+### Asumption
+
+All leagues is better an as object. Worldwide there might be thousands of leagues, each with only about 30 teams on average.
+
+> Mapping, filtering or reducing over 1000+ items can result in bad UX. Selecting from an equally large object is better.
+
+> Fetching such large number of leagues is also rather tedious. Instead we cache the response and add an expiration time of one hour.
