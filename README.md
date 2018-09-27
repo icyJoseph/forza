@@ -1,14 +1,32 @@
-# Forza Football
+# <a id="top"></a>Forza Football
 
 Build as part of a coding challenge for Forza Football
 
-## Demo
+## Content
 
-The solution to the challenge stated below can be found [in this link.](https://talented-reaction.surge.sh)
+1. [Demo](#demo)
+
+2. [Running Locally](#local)
+
+3. [Challenge](#challenge)
+
+4. [Solution](#sold)
+
+5. [UI](#ui)
+
+6. [Assumptions](#assumptions)
+
+## <a id="demo"></a>Demo
+
+[top](#top)
+
+A deployed version of the solution: [in this link](https://talented-reaction.surge.sh).
 
 Details about the solution can be found in the [Solution](#sol) section below.
 
-## Running Locally
+## <a id="local"></a>Running Locally
+
+[top](#top)
 
 1.  Clone the repository.
 
@@ -19,7 +37,7 @@ Details about the solution can be found in the [Solution](#sol) section below.
 2.  Go into the repository.
 
     ```
-    cd forza/
+    cd forza
     ```
 
 3.  Install dependencies.
@@ -61,13 +79,17 @@ Why not run locally as developer?
 
 > For development, it looks for http://localhost:3000/, while for production it looks for the given end point.
 
+> It is better to go to the [Demo](#demo).
+
 To change this behavior, go to `src/constants/index.js` and change the url constant to:
 
 ```javascript
 export const url = process.env.REACT_APP_SECRET;
 ```
 
-## Challenge
+## <a id="challenge"></a>Challenge
+
+[top](#top)
 
 The new football season brings with it a sense of excitement among fans as everything
 starts again. At this time of year many fans enjoy making predictions about how the
@@ -89,6 +111,8 @@ your solution after sending it to us, write it down and bring your own feedback 
 presentation.
 
 ## <a id="sol"></a>Solution
+
+[top](#top)
 
 The proposed solution is a React-Redux application.
 
@@ -156,7 +180,9 @@ Simple redux store with keys for predictions, all leagues and sorting status.
 
 > This could have been a local state, but since we are caching the store state at every new action, we can in fact, also save the user sorting criteria.
 
-### User Interaction
+## <a id="ui"></a>User Interaction
+
+[top](#top)
 
 Upon landing the leagues are fetched. The user can select one, which will navigate to `/leagueId`.
 
@@ -172,7 +198,9 @@ Upon landing the leagues are fetched. The user can select one, which will naviga
 
 - The user can go back to the league with the pinned back button at the bottom right.
 
-### Asumption
+## <a id="assumptions"></a>Asumptions
+
+[top](#top)
 
 All leagues is better an as object. Worldwide there might be thousands of leagues, each with only about 30 teams on average.
 
