@@ -2,6 +2,71 @@
 
 Build as part of a coding challenge for Forza Football
 
+## Demo
+
+The solution to the challenge stated below can be found [in this link.](https://talented-reaction.surge.sh)
+
+Details about the solution can be found in the [Solution](#sol) section below.
+
+## Running Locally
+
+1.  Clone the repository.
+
+    ```
+    git clone
+    ```
+
+2.  Go into the repository.
+
+    ```
+    cd forza/
+    ```
+
+3.  Install dependencies.
+
+    ```
+    yarn
+    ```
+
+    or
+
+    ```
+    npm i
+    ```
+
+4.  Build the App.
+
+    ````
+    yarn buil
+    ```
+    ````
+
+    or
+
+    ```
+    npm run build
+    ```
+
+5.  Serve the build.
+
+    ```
+    serve -s build
+    ```
+
+6.  Open `http://localhost:5000` in your browser.
+
+Why not run locally as developer?
+
+> The URL to fetch data is selected depending on the environment you are in.
+
+> For development, it looks for http://localhost:3000/, while for production it looks for the given end point.
+
+To change this behavior, go to `src/constants/index.js` and change the url constant to:
+
+```javascript
+export const url = process.env.REACT_APP_SECRET;
+```
+
 ## Challenge
 
 The new football season brings with it a sense of excitement among fans as everything
@@ -23,7 +88,7 @@ together, you don’t need to spend days on this. If you find stuff that you wou
 your solution after sending it to us, write it down and bring your own feedback to the
 presentation.
 
-## Solution
+## <a id="sol"></a>Solution
 
 The proposed solution is a React-Redux application.
 

@@ -32,7 +32,6 @@ export const PRIMARY = "primary";
 export const SECONDARY = "secondary";
 
 // endpoints
-// change to process env later on
 export const url =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_SECRET
