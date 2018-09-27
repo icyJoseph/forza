@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Portal from "../../components/Portal";
 import { TeamsButtonPad } from "../../components/TeamsButtonPad";
 import { PlayersButtonPad } from "../../components/PlayersButtonPad";
@@ -37,6 +38,17 @@ export const Prediction = ({
       />
     )
   );
+};
+
+Prediction.propTypes = {
+  open: PropTypes.bool,
+  player: PropTypes.object,
+  hook: PropTypes.string,
+  setTopScorer: PropTypes.func,
+  setPrediction: PropTypes.func,
+  leagueName: PropTypes.string,
+  close: PropTypes.func,
+  team: PropTypes.object
 };
 
 export default connect(
