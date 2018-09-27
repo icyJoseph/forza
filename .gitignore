@@ -26,3 +26,4 @@ yarn.lock
 REST/*.json
 package-lock.json
 **/*.png
+.env

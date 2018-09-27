@@ -33,9 +33,12 @@ export const SECONDARY = "secondary";
 
 // endpoints
 // change to process env later on
-export const url = "http://192.168.0.4:1337/";
+export const url =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_SECRET
+    : "http://localhost:1337/";
 
-export const homepage = "http://localhost:3000";
+export const homepage = "https://talented-reaction.surge.sh";
 
 // breakpoints
 export const portalBreakPoint = "(min-width: 699px)";

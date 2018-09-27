@@ -13,6 +13,7 @@ import { TOPMENU, SHARE, CLEAR } from "../../constants";
  * @description Stateless component which renders a
  * Material UI AppBar and the share,
  * clear buttons when the user navigates inside a league.
+ * TODO: disable share when not enough data is present
  */
 export const TopMenu = ({
   match,
@@ -24,9 +25,10 @@ export const TopMenu = ({
 }) => {
   const { params } = match;
   const league = allLeagues[params.league];
-  const showShare = !!window.navigator.share;
   const leagueName = league ? league.leagueName : null;
   const country = league ? league.country : null;
+  const showShare = !!window.navigator.share;
+
   return (
     <Bar id={TOPMENU} position="sticky">
       <Toolbar>

@@ -43,8 +43,8 @@ export const handleShare = (leagueName, predictions, topScorer) => {
     window.navigator.share({
       text: `${predictions[1].teamName} will win the ${leagueName}, with ${
         topScorer.playerName
-      } as top scorer`,
-      title: `My ${leagueName} Predictions`,
+      } as top scorer.`,
+      title: `My ${leagueName} Predictions.`,
       url: `${homepage}`
     })
   );
