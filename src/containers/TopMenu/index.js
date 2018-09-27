@@ -63,12 +63,17 @@ export const TopMenu = ({
   );
 };
 
+export const mapStateToProps = ({
+  leagues: { allLeagues },
+  predictions: { predictions, topScorer }
+}) => ({
+  allLeagues,
+  predictions,
+  topScorer
+});
+
 export default connect(
-  ({ leagues: { allLeagues }, predictions: { predictions, topScorer } }) => ({
-    allLeagues,
-    predictions,
-    topScorer
-  }),
+  mapStateToProps,
   { resetAll }
 )(TopMenu);
 
