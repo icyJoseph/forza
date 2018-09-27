@@ -42,7 +42,6 @@ export const Place = styled(Paper).attrs({
   display: flex;
   flex-direction: column;
   align-content: stretch;
-  border-radius: 15px 0px;
   text-align: center;
   margin: 0 5px;
   min-width: 120px;
