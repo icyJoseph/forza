@@ -15,7 +15,6 @@ export function sortPodium(match, place) {
 const podiumSorter = (matches, predictions) => {
   return Object.keys(predictions)
     .map(pr => ({
-      place: 1,
       ...predictions[pr]
     }))
     .sort(
