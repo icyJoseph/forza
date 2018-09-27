@@ -49,15 +49,14 @@ Details about the solution can be found in the [Solution](#sol) section below.
     or
 
     ```
-    npm i
+    npm install
     ```
 
 4.  Build the App.
 
-    ````
-    yarn buil
     ```
-    ````
+    yarn build
+    ```
 
     or
 
