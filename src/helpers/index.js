@@ -34,19 +34,20 @@ export function setUpMediaQuery(query) {
 
 export const handleShare = (leagueName, predictions, topScorer) => {
   // if we don't have the data, don't do anything
-  if (predictions[1] && topScorer) {
-    // if we do, but no navigator share, don't do anything
-    if (window.navigator.share) {
-      // return a promise
-      return window.navigator.share({
-        text: `${predictions[1].teamName} will win the ${leagueName}, with ${
-          topScorer.playerName
-        } as top scorer`,
-        title: `My ${leagueName} Predictions`,
-        url: `${homepage}`
-      });
-    }
-  }
+  // if we do, but no navigator share, don't do anything
+  // return a promise
+  return (
+    predictions[1] &&
+    topScorer &&
+    window.navigator.share &&
+    window.navigator.share({
+      text: `${predictions[1].teamName} will win the ${leagueName}, with ${
+        topScorer.playerName
+      } as top scorer`,
+      title: `My ${leagueName} Predictions`,
+      url: `${homepage}`
+    })
+  );
 };
 
 export const shouldFetch = expiry => {
