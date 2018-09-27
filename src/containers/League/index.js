@@ -1,8 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
-
-import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import Prediction from "../../containers/Prediction";
 
@@ -10,8 +7,11 @@ import Podium from "../../components/Podium";
 import { CardContainer } from "../../components/Card";
 import List from "../../components/List";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
-
 import { buildPlayersTree, goHome, setUpMediaQuery } from "../../helpers";
+import {
+  PredictionContainer,
+  StyledBottomNavigation
+} from "../../components/Common";
 import {
   podiumBreakpoint,
   topMenuBreakPoint,
@@ -19,23 +19,6 @@ import {
   PLAYERS,
   TOPMENU
 } from "../../constants";
-
-export const PredictionContainer = styled.div`
-  position: sticky;
-  top: ${props => props.top}
-  display: flex;
-  flex-direction: column;
-  padding-top:10px;
-  margin-bottom: 20px;
-  z-index: 20;
-`;
-
-export const StyledBottomNavigation = styled(BottomNavigation)`
-  position: fixed;
-  bottom: 0;
-  z-index: 10;
-  width: 100%;
-`;
 
 export class League extends Component {
   state = {

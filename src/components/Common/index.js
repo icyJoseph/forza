@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
 
 const common = css`
   display: flex;
@@ -97,4 +98,21 @@ export const FlexCenterContainer = styled.div`
   flex-direction: row;
   align-items: flex-end;
   justify-content: center;
+`;
+
+export const PredictionContainer = styled.div`
+  position: sticky;
+  top: ${props => props.top}
+  display: flex;
+  flex-direction: column;
+  padding-top:10px;
+  margin-bottom: 20px;
+  z-index: 20;
+`;
+
+export const StyledBottomNavigation = styled(BottomNavigation)`
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
 `;
