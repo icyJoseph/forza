@@ -48,3 +48,16 @@ export const handleShare = (leagueName, predictions, topScorer) => {
     }
   }
 };
+
+export const shouldFetch = expiry => {
+  const now = new Date();
+  const lastSave = new Date(expiry || now.getTime() - 1000);
+
+  return now > lastSave;
+};
+
+export const addExpiry = allLeagues => {
+  const now = new Date();
+  const inOneHour = new Date(now.getTime() + 60 * 60 * 1000);
+  return { allLeagues, expiry: inOneHour };
+};

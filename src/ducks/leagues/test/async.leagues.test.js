@@ -11,6 +11,13 @@ import { url } from "../../../constants";
 import mock from "./mock.data";
 import format from "./mock.format";
 
+const DATE_TO_USE = new Date("2016");
+const _Date = Date;
+global.Date = jest.fn(() => DATE_TO_USE);
+global.Date.UTC = _Date.UTC;
+global.Date.parse = _Date.parse;
+global.Date.now = _Date.now;
+
 describe("successful async fetchLeagues", () => {
   const mockAxios = new MockAdapter(axios);
   mockAxios.onGet(url).reply(200, { ...mock });
@@ -26,6 +33,7 @@ describe("successful async fetchLeagues", () => {
     return promise.then(() => {
       expect(dispatch).toHaveBeenLastCalledWith({
         type: SUCCESS_LEAGUES_DATA,
+        expiry: DATE_TO_USE,
         ...format
       });
       done();

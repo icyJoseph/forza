@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Card, { CardContainer } from "../../components/Card";
 import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
-import { curry } from "../../helpers";
+import { curry, shouldFetch } from "../../helpers";
 import logo from "../../logo.png";
 
 const HeaderSegment = styled.div`
@@ -33,7 +33,8 @@ const ImageHeader = logo => (
 
 export class Landing extends Component {
   componentDidMount() {
-    this.props.fetch();
+    const { expiry } = this.props;
+    return shouldFetch(expiry) && this.props.fetch();
   }
 
   goToLeague = id => {

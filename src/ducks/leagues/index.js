@@ -1,6 +1,7 @@
 import axios from "axios";
 import { efficientReformat } from "./helpers";
 import { url } from "../../constants";
+import { addExpiry } from "../../helpers";
 
 // action types
 export const FETCH_LEAGUES_DATA = "leagues fetch";
@@ -12,9 +13,10 @@ export const onFetchLeagueData = {
   type: FETCH_LEAGUES_DATA
 };
 
-export const onSuccessLeagueData = allLeagues => ({
+export const onSuccessLeagueData = ({ allLeagues, expiry }) => ({
   type: SUCCESS_LEAGUES_DATA,
-  allLeagues
+  allLeagues,
+  expiry
 });
 
 export const onErroLeagueData = {
@@ -22,8 +24,11 @@ export const onErroLeagueData = {
 };
 
 // selector
-export const mapAllLeaguesToProps = ({ leagues: { allLeagues, loading } }) => ({
+export const mapAllLeaguesToProps = ({
+  leagues: { allLeagues, loading, expiry }
+}) => ({
   allLeagues,
+  expiry,
   loading
 });
 
@@ -35,6 +40,7 @@ export const fetchLeagues = dispatch => {
     .get(url)
     .then(({ data: { leagues } }) => leagues)
     .then(efficientReformat)
+    .then(addExpiry)
     .then(allLeagues => dispatch(onSuccessLeagueData(allLeagues)))
     .catch(() => dispatch(onErroLeagueData));
 };
@@ -48,7 +54,8 @@ export const mapFetchAction = dispatch => ({
 const initialState = {
   allLeagues: {},
   loading: false,
-  error: false
+  error: false,
+  expiry: null
 };
 
 // reducer
@@ -57,8 +64,8 @@ function leagues(state = initialState, action) {
     case FETCH_LEAGUES_DATA:
       return { ...state, loading: true, error: false };
     case SUCCESS_LEAGUES_DATA:
-      const { allLeagues } = action;
-      return { ...state, allLeagues, loading: false, error: false };
+      const { allLeagues, expiry } = action;
+      return { ...state, allLeagues, expiry, loading: false, error: false };
     case ERROR_LEAGUES_DATA:
       return { ...state, error: true, loading: false };
     default:

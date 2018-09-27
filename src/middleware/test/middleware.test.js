@@ -7,7 +7,7 @@ import { STATE_NAME } from "../../constants";
 const TEST = "test";
 
 const mockedState = {
-  leagues: { allLeagues: {}, error: false, loading: false },
+  leagues: { allLeagues: {}, error: false, loading: false, expiry: null },
   predictions: { predictions: {}, topScorer: {} },
   sorting: false
 };
