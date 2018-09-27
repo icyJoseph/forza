@@ -1,4 +1,5 @@
 import { buildPlayersTree, curry, handleShare, shouldFetch } from "../";
+import { homepage } from "../../constants";
 
 const leagueName = "test";
 const teams = [
@@ -85,9 +86,9 @@ describe("handle share", () => {
   // to the share api, let's make sure we are passing it correctly
 
   const expected = {
-    text: "A will win the La, with B as top scorer",
-    title: "My La Predictions",
-    url: "http://localhost:3000"
+    text: "A will win the La, with B as top scorer.",
+    title: "My La Predictions.",
+    url: homepage
   };
 
   it("shares the data", done => {
