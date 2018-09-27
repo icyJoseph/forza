@@ -72,6 +72,12 @@ Details about the solution can be found in the [Solution](#sol) section below.
 
 6.  Open `http://localhost:5000` in your browser.
 
+7.  To see test coverage:
+
+    ```
+    yarn test:report
+    ```
+
 Why not run locally as developer?
 
 > The URL to fetch data is selected depending on the environment you are in.
