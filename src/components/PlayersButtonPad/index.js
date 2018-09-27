@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { AnswerButton, MobileAnswerButton } from "../Buttons";
 import { SideLabel } from "../Label";
 import { curry } from "../../helpers";
@@ -33,4 +34,8 @@ export const PlayersButtonPad = ({ matches, ...props }) => {
       />
     </Fragment>
   );
+};
+
+PlayersButtonPad.propTypes = {
+  matches: PropTypes.bool
 };
