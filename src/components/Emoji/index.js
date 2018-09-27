@@ -1,6 +1,6 @@
 import React from "react";
 
-const labelSymbolSelector = place => {
+export const labelSymbolSelector = place => {
   switch (place) {
     case 1:
       return { symbol: "🥇", label: "1st" };
