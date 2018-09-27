@@ -23,7 +23,7 @@
     "test": "react-scripts test --env=jsdom",
     "test:report": "yarn test --coverage",
     "eject": "react-scripts eject",
-    "deploy": "yarn test && yarn build && surge --domain https://talented-reaction.surge.sh"
+    "deploy": "yarn test:report && yarn build && surge --domain https://talented-reaction.surge.sh"
   },
   "jest": {
     "collectCoverageFrom": [
