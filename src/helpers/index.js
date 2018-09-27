@@ -1,3 +1,5 @@
+import { homepage } from "../constants";
+
 const pickTopPlayers = ({ topPlayers, ...team }, leagueName) =>
   topPlayers.reduce((prev, { playerName, ...player }) => {
     return {
@@ -29,3 +31,20 @@ export function setUpMediaQuery(query) {
   // are we matching?
   return this.updateMatches();
 }
+
+export const handleShare = (leagueName, predictions, topScorer) => {
+  // if we don't have the data, don't do anything
+  if (predictions[1] && topScorer) {
+    // if we do, but no navigator share, don't do anything
+    if (window.navigator.share) {
+      // return a promise
+      return window.navigator.share({
+        text: `${predictions[1].teamName} will win the ${leagueName}, with ${
+          topScorer.playerName
+        } as top scorer`,
+        title: `My ${leagueName} Predictions`,
+        url: `${homepage}`
+      });
+    }
+  }
+};

@@ -1,4 +1,4 @@
-import { buildPlayersTree, curry } from "../";
+import { buildPlayersTree, curry, handleShare } from "../";
 
 const leagueName = "test";
 const teams = [
@@ -73,5 +73,27 @@ describe("curry", () => {
   const sum = (...args) => args.reduce((acc, val) => acc + val, 0);
   it("does partial application", () => {
     expect(curry(sum)(1, 2, 3)(4, 5, 6)).toEqual(21);
+  });
+});
+
+describe("handle share", () => {
+  const leagueName = "La";
+  const predictions = { 1: { teamName: "A" } };
+  const topScorer = { playerName: "B" };
+
+  // our mock window.navigator.share will return the data it transmits
+  // to the share api, let's make sure we are passing it correctly
+
+  const expected = {
+    text: "A will win the La, with B as top scorer",
+    title: "My La Predictions",
+    url: "http://localhost:3000"
+  };
+
+  it("shares the data", done => {
+    handleShare(leagueName, predictions, topScorer).then(res => {
+      expect(res).toEqual(expected);
+      done();
+    });
   });
 });

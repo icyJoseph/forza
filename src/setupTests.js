@@ -25,3 +25,16 @@ const localStorageMock = (function() {
 Object.defineProperty(window, "localStorage", {
   value: localStorageMock
 });
+
+const shareMock = (function() {
+  return {
+    share: function(data) {
+      return new Promise(resolve => resolve(data));
+    }
+  };
+})();
+
+// Mock Share
+Object.defineProperty(window, "navigator", {
+  value: shareMock
+});

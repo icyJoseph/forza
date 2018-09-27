@@ -35,6 +35,8 @@ export const SECONDARY = "secondary";
 // change to process env later on
 export const url = "http://192.168.0.4:1337/";
 
+export const homepage = "http://localhost:3000";
+
 // breakpoints
 export const portalBreakPoint = "(min-width: 699px)";
 export const podiumBreakpoint = "(min-width: 785px)";
