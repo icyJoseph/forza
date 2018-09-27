@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { SideLabel } from "../Label";
 import { PLACES } from "../../constants";
 import { curry } from "../../helpers";
@@ -35,4 +36,10 @@ export const TeamsButtonPad = ({ leagueName, team, matches, ...props }) => {
       />
     </Fragment>
   );
+};
+
+TeamsButtonPad.propTypes = {
+  leagueName: PropTypes.string,
+  team: PropTypes.object,
+  matches: PropTypes.bool
 };
