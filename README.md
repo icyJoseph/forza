@@ -31,7 +31,7 @@ Details about the solution can be found in the [Solution](#sol) section below.
 1.  Clone the repository.
 
     ```
-    git clone
+    git clone https://github.com/icyJoseph/forza.git
     ```
 
 2.  Go into the repository.
