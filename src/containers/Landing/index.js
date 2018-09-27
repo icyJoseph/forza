@@ -7,6 +7,11 @@ import { mapAllLeaguesToProps, mapFetchAction } from "../../ducks/leagues";
 import { curry, shouldFetch } from "../../helpers";
 import logo from "../../logo.png";
 
+/**
+ *
+ * @description Fetches leagues data and renders a
+ * card for each one of them.
+ */
 export class Landing extends Component {
   componentDidMount() {
     const { expiry } = this.props;

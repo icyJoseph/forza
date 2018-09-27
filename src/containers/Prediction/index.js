@@ -6,6 +6,14 @@ import { TeamsButtonPad } from "../../components/TeamsButtonPad";
 import { PlayersButtonPad } from "../../components/PlayersButtonPad";
 import { setPrediction, setTopScorer } from "../../ducks/predictions";
 
+/**
+ *
+ * @description A set of buttons that will attach to the
+ * card selected by the user. This is a singleton.
+ * In mobile view they attack to the Floating Action
+ * Buttons. It also includes label in the middle of
+ * the screen which indicates the current selection.
+ */
 export const Prediction = ({
   open,
   player,

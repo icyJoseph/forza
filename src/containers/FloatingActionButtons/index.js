@@ -21,6 +21,13 @@ import logo from "../../logo.png";
 
 export const sortingColor = sorting => (sorting ? PRIMARY : SECONDARY);
 
+/**
+ *
+ * @description  Normally two buttons.
+ * Back and sort by goals.
+ * In mobile view the Prediction container
+ * attaches to the Floating Action Buttons.
+ */
 export const FloatingActionButtons = ({
   toggle,
   sorting,

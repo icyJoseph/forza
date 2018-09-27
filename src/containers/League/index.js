@@ -29,6 +29,11 @@ import {
   TOPMENU
 } from "../../constants";
 
+/**
+ * @description Shows the user's predictions for a league.
+ *  also renders a card for each team or player in the league.
+ *
+ */
 export class League extends Component {
   state = {
     value: TEAMS,
