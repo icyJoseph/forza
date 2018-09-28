@@ -26,6 +26,15 @@ export const Bar = styled(AppBar)`
 export const Name = styled.div`
   text-align: center;
   align-items: center;
+
+  @media (max-width: 315px) {
+    font-size: 9pt;
+    height: 50px;
+  }
+  @media (min-width: 315px) and (max-width: 400px) {
+    font-size: 10pt;
+    height: 50px;
+  }
 `;
 
 export const Position = styled.div`
@@ -47,21 +56,26 @@ export const Place = styled(Paper).attrs({
   min-width: 120px;
   max-width: 120px;
   word-wrap: break-word;
-  @media (min-width: 685px) {
-    min-width: 160px;
-    max-width: 160px;
+  @media (max-width: 315px) {
+    min-width: 70px;
+    max-width: 70px;
   }
-  @media (min-width: 400px) {
+  @media (min-width: 315px) and (max-width: 402px) {
+    min-width: 85px;
+    max-width: 85px;
+  }
+  @media (min-width: 403px) and (max-width: 590px) {
     min-width: 110px;
     max-width: 110px;
   }
+  @media (min-width: 590px) {
+    min-width: 160px;
+    max-width: 160px;
+  }
 `;
 
-export const PodiumWrapper = styled(Paper).attrs({
-  style: ({ open }) => ({
-    height: open ? "200px" : "115px"
-  })
-})`
+export const PodiumWrapper = styled(Paper)`
+  height: ${props => (props.open ? "200px" : "115px")};
   transition: height 0.5s ease;
   width: 90%;
   margin: 0 auto;
@@ -69,6 +83,9 @@ export const PodiumWrapper = styled(Paper).attrs({
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: 400px) {
+    height: ${props => (props.open ? "200px" : "150px")};
+  }
 `;
 
 export const PlaceHolderContainer = styled.div`
@@ -86,6 +103,20 @@ export const CenteredDiv = styled.div`
 export const CommonContainer = styled.div`
   margin: 5px auto 0;
   height: 30px;
+  @media (max-width: 400px) {
+    font-size: 9pt;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  @media (min-width: 300px) and (max-width: 400px) {
+    font-size: 10pt;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
 `;
 
 export const BlueSpan = styled.span`
