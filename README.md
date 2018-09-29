@@ -89,7 +89,7 @@ Why not run locally as developer?
 To change this behavior, go to `src/config.js` and change the url to:
 
 ```javascript
-export const url = process.env.REACT_APP_SECRET;
+export const url = "the end point you have me"; // :)
 ```
 
 ## <a id="challenge"></a>Challenge
