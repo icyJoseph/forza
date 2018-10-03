@@ -1,7 +1,0 @@
-### 
-GET https://s3-eu-west-1.amazonaws.com/forza-home-assignment/refinery-frontend/league-data.json
-
-###
-GET http://localhost:1337/
-
-
